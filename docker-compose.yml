@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  server:
+    image: taccdash/democratizingdata-api:72526009
+    command: uvicorn main:app --host 0.0.0.0 --reload
+    container_name: showusthedata_api
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
