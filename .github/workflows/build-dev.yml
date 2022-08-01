@@ -39,5 +39,4 @@ jobs:
         name: Build & push commit tagged Docker image
         with:
           push: true
-          tags: 
-            - taccdash/democratizingdata-api:${{ steps.vars.outputs.sha_short }}
+          tags: taccdash/democratizingdata-api:${{ steps.vars.outputs.sha_short }}
