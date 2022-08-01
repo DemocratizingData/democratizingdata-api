@@ -1,10 +1,10 @@
 from typing import Optional
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
 import os
 import logging
 import sys
-import database
-from database.models import Topic, Publication, Author, Dataset, Alias
+from democratizing import crud, schemas, dependencies
 
 # Set up logging
 logger = logging.getLogger()
@@ -42,11 +42,11 @@ app = FastAPI(
 )
 
 
-@app.get("/topics", response_model=list[Topic], tags=["topics"])
-def get_topics():
-    return database.get_topics()
+@app.get("/topics", response_model=list[schemas.Topic], tags=["topics"], )
+def get_topics(db: Session=Depends(dependencies.get_db)):
+    return crud.get_topics(db)
 
-
+"""
 @app.get(
     "/topics/{topic_id}/publications", response_model=list[Publication], tags=["topics"]
 )
@@ -157,3 +157,4 @@ def get_publication_authors(publication_id: int):
 )
 def get_publication_datasets(publication_id: int):
     return database.get_publication_datasets(publication_id)
+"""

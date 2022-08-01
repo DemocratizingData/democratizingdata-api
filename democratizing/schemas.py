@@ -1,7 +1,8 @@
 from datetime import datetime
 from types import NoneType
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, constr
+
 from typing import Union
 from enum import Enum
 
@@ -17,29 +18,33 @@ class Topic(BaseModel):
         description="A unique ID that can be used to retrieve topics",
         example="32",
     )
-    keyword_id: int = Field(
+    run_id: int = Field(
         None,
-        title="Keyword ID",
-        description="A unique ID that can be used to retrieve the keyword for a topic",
-        example="1",
+        title="Run ID",
+        description="A unique ID that identifies which agency run generated this topic"
     )
-    keyword: str = Field(
+    keywords: constr(max_length=1028) = Field(
         None,
-        title="Keyword",
-        description="The keyword for a topic",
-        example="Water Quality",
+        title="Keywords",
+        description="A list of keywords separated by the pipe character |",
+        example="Water Quality|Education"
     )
-    score: Union[float, NoneType] = Field(
+    external_topic_id: Union[constr(max_length=128), NoneType] = Field(
+        None,
+        title="External Topic ID",
+        description="A unique ID that corresponds to an external topic",
+    )
+    prominence: Union[float, NoneType] = Field(
         None, title="Score", description="Relevance score"
     )
-    source_id: Union[int, NoneType] = Field(
+    last_updated_date: datetime = Field(
         None,
-        title="Source ID",
-        description="A unique ID identifying the metadata source",
+        title="Last Updated Date",
+        description="Timestamp of last update"
     )
-    organization_name: Union[str, NoneType] = Field(
-        None, title="Organization Name", description="An organization name"
-    )
+
+    class Config:
+        orm_mode = True
 
 
 class Publication(BaseModel):

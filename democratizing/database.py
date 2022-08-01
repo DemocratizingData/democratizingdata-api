@@ -21,6 +21,8 @@ logger.debug(
 logger.debug("Initializing PostgreSQL connection")
 SQLALCHEMY_DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+# Used as datatype for get_db dependency
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
