@@ -35,7 +35,7 @@ jobs:
         poetry install
     - name: Run Server-side unit tests and generate coverage report
       run: |
-        poetry run pytest tup_services -c unit_test.ini
+        poetry run pytest democratizing 
   Server_Side_Linting:
     runs-on: ubuntu-18.04
     steps:
@@ -57,4 +57,4 @@ jobs:
         pip install black
     - name: Run Black formatter in check mode
       run: |
-        black tup_services --target-version py310 --check
+        black democratizing --target-version py310 --check
