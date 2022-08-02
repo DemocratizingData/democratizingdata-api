@@ -4,10 +4,6 @@ import logging
 
 logger = logging.getLogger()
 
-"""
-def create_topic_from_listing(row: tuple[int, int, str]) -> Topic:
-    return Topic(topic_id=row[0], keyword_id=row[1], keyword=row[2])
-"""
 
 def get_topics(db: Session):
     return db.query(Topic).all()

@@ -1,10 +1,10 @@
 from typing import Optional
 from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
 import os
 import logging
 import sys
-from democratizing import crud, schemas, dependencies
+from democratizing.topics.router import router as topics_router
 
 # Set up logging
 logger = logging.getLogger()
@@ -41,120 +41,13 @@ app = FastAPI(
     openapi_tags=tags_metadata,
 )
 
-
-@app.get("/topics", response_model=list[schemas.Topic], tags=["topics"], )
-def get_topics(db: Session=Depends(dependencies.get_db)):
-    return crud.get_topics(db)
-
-"""
-@app.get(
-    "/topics/{topic_id}/publications", response_model=list[Publication], tags=["topics"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
-def get_topic_publications(topic_id: int):
-    return database.get_topic_publications(topic_id)
 
-
-@app.get("/topics/{topic_id}/authors", response_model=list[Author], tags=["topics"])
-def get_topic_authors(topic_id: int):
-    return database.get_topic_authors(topic_id)
-
-
-@app.get("/topics/{topic_id}/datasets", response_model=list[Dataset], tags=["topics"])
-def get_topic_datasets(topic_id: int):
-    return database.get_topic_datasets(topic_id)
-
-
-@app.get("/authors", response_model=list[Author], tags=["authors"])
-def get_authors():
-    return database.get_authors()
-
-
-@app.get(
-    "/authors/{author_id}/publications",
-    response_model=list[Publication],
-    tags=["authors"],
-)
-def get_author_publications(author_id: int):
-    return database.get_author_publications(author_id)
-
-
-@app.get("/authors/{author_id}/topics", response_model=list[Topic], tags=["authors"])
-def get_author_topics(author_id: int):
-    return database.get_author_topics(author_id)
-
-
-@app.get(
-    "/authors/{author_id}/datasets", response_model=list[Dataset], tags=["authors"]
-)
-def get_author_datasets(author_id: int):
-    return database.get_author_datasets(author_id)
-
-
-@app.get("/datasets", response_model=list[Dataset], tags=["datasets"])
-def get_datasets():
-    return database.get_datasets()
-
-
-@app.get(
-    "/datasets/{parent_alias_id}/aliases", response_model=list[Alias], tags=["datasets"]
-)
-def get_dataset_aliases(parent_alias_id: int):
-    return database.get_dataset_aliases(parent_alias_id)
-
-
-@app.get(
-    "/datasets/{parent_alias_id}/publications",
-    response_model=list[Publication],
-    tags=["datasets"],
-)
-def get_dataset_publications(parent_alias_id: int):
-    return database.get_dataset_publications(parent_alias_id)
-
-
-@app.get(
-    "/datasets/{parent_alias_id}/topics", response_model=list[Topic], tags=["datasets"]
-)
-def get_dataset_topics(parent_alias_id: int):
-    return database.get_dataset_topics(parent_alias_id)
-
-
-@app.get(
-    "/datasets/{parent_alias_id}/authors",
-    response_model=list[Author],
-    tags=["datasets"],
-)
-def get_dataset_authors(parent_alias_id: int):
-    return database.get_dataset_authors(parent_alias_id)
-
-
-@app.get("/publications", response_model=list[Publication], tags=["publications"])
-def get_publications():
-    return database.get_publications()
-
-
-@app.get(
-    "/publications/{publication_id}/topics",
-    response_model=list[Topic],
-    tags=["publications"],
-)
-def get_publication_topics(publication_id: int):
-    return database.get_publication_topics(publication_id)
-
-
-@app.get(
-    "/publications/{publication_id}/authors",
-    response_model=list[Author],
-    tags=["publications"],
-)
-def get_publication_authors(publication_id: int):
-    return database.get_publication_authors(publication_id)
-
-
-@app.get(
-    "/publications/{publication_id}/datasets",
-    response_model=list[Dataset],
-    tags=["publications"],
-)
-def get_publication_datasets(publication_id: int):
-    return database.get_publication_datasets(publication_id)
-"""
+# Include subroutes
+app.include_router(topics_router)
