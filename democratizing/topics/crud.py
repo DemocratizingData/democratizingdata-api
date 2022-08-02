@@ -8,6 +8,7 @@ logger = logging.getLogger()
 def get_topics(db: Session):
     return db.query(Topic).all()
 
+
 """
 def get_topic_publications(topic_id: int) -> list[Publication]:
     return [

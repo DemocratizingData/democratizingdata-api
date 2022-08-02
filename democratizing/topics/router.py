@@ -18,5 +18,5 @@ router = APIRouter(
 
 
 @router.get("", response_model=list[schemas.Topic])
-def get_topics(db: Session=Depends(dependencies.get_db)):
+def get_topics(db: Session = Depends(dependencies.get_db)):
     return crud.get_topics(db)

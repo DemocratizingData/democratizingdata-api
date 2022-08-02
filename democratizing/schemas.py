@@ -21,13 +21,13 @@ class Topic(BaseModel):
     run_id: int = Field(
         None,
         title="Run ID",
-        description="A unique ID that identifies which agency run generated this topic"
+        description="A unique ID that identifies which agency run generated this topic",
     )
     keywords: constr(max_length=1028) = Field(
         None,
         title="Keywords",
         description="A list of keywords separated by the pipe character |",
-        example="Water Quality|Education"
+        example="Water Quality|Education",
     )
     external_topic_id: Union[constr(max_length=128), NoneType] = Field(
         None,
@@ -38,9 +38,7 @@ class Topic(BaseModel):
         None, title="Score", description="Relevance score"
     )
     last_updated_date: datetime = Field(
-        None,
-        title="Last Updated Date",
-        description="Timestamp of last update"
+        None, title="Last Updated Date", description="Timestamp of last update"
     )
 
     class Config:
