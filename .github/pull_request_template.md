@@ -2,7 +2,7 @@
 
 ## Related Github Issues:
 
-- [TUP-1234](https://jira.tacc.utexas.edu/browse/TUP-1234)
+- [DDA-1234](https://github.com/DemocratizingData/democratizingdata-api/issues/1234)
 
 ## Summary of Changes:
 
