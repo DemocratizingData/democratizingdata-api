@@ -18,5 +18,9 @@ router = APIRouter(
 
 
 @router.get("", response_model=list[schemas.Publication])
-def get_publications(db: Session = Depends(dependencies.get_db)):
-    return crud.get_publications(db)
+def get_publications(
+    limit: int | None = None,
+    offset: int | None = None,
+    db: Session = Depends(dependencies.get_db),
+):
+    return crud.get_publications(limit, offset, db)
