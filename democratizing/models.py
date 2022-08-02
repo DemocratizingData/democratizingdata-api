@@ -30,3 +30,14 @@ class Publication(Base):
     citation_count = Column(Integer)
     fw_citation_impact = Column(Float)
     last_updated_date = Column(DateTime)
+
+
+class PublicationTopic(Base):
+    __tablename__ = "publication_topic"
+
+    id = Column(Integer, primary_key=True, index=True)
+    run_id = Column(Integer)
+    publication_id = Column(Integer, ForeignKey("publication.id"))
+    topic_id = Column(Integer, ForeignKey("topic.id"))
+    score = Column(String)
+    last_updated_date = Column(DateTime)

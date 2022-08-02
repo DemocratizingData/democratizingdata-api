@@ -12,7 +12,7 @@ class Topic(BaseModel):
     A searchable topic
     """
 
-    topic_id: int = Field(
+    id: int = Field(
         None,
         title="Topic ID",
         description="A unique ID that can be used to retrieve topics",
@@ -50,7 +50,7 @@ class Publication(BaseModel):
     A publication
     """
 
-    publication_id: int = Field(
+    id: int = Field(
         None,
         title="Publication ID",
         description="A unique ID that can be used to retrieve publications",
