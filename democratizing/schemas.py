@@ -1,7 +1,8 @@
 from datetime import datetime
 from types import NoneType
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, constr
+
 from typing import Union
 from enum import Enum
 
@@ -11,35 +12,37 @@ class Topic(BaseModel):
     A searchable topic
     """
 
-    topic_id: int = Field(
+    id: int = Field(
         None,
         title="Topic ID",
         description="A unique ID that can be used to retrieve topics",
         example="32",
     )
-    keyword_id: int = Field(
+    run_id: int = Field(
         None,
-        title="Keyword ID",
-        description="A unique ID that can be used to retrieve the keyword for a topic",
-        example="1",
+        title="Run ID",
+        description="A unique ID that identifies which agency run generated this topic",
     )
-    keyword: str = Field(
+    keywords: constr(max_length=1028) = Field(
         None,
-        title="Keyword",
-        description="The keyword for a topic",
-        example="Water Quality",
+        title="Keywords",
+        description="A list of keywords separated by the pipe character |",
+        example="Water Quality|Education",
     )
-    score: Union[float, NoneType] = Field(
+    external_topic_id: Union[constr(max_length=128), NoneType] = Field(
+        None,
+        title="External Topic ID",
+        description="A unique ID that corresponds to an external topic",
+    )
+    prominence: Union[float, NoneType] = Field(
         None, title="Score", description="Relevance score"
     )
-    source_id: Union[int, NoneType] = Field(
-        None,
-        title="Source ID",
-        description="A unique ID identifying the metadata source",
+    last_updated_date: datetime = Field(
+        None, title="Last Updated Date", description="Timestamp of last update"
     )
-    organization_name: Union[str, NoneType] = Field(
-        None, title="Organization Name", description="An organization name"
-    )
+
+    class Config:
+        orm_mode = True
 
 
 class Publication(BaseModel):
@@ -47,19 +50,34 @@ class Publication(BaseModel):
     A publication
     """
 
-    publication_id: int = Field(
+    id: int = Field(
         None,
         title="Publication ID",
         description="A unique ID that can be used to retrieve publications",
         example="366",
     )
-    title: str = Field(
+    run_id: int = Field(
+        None,
+        title="Run ID",
+        description="A unique ID that identifies which agency run generated this publication",
+    )
+    journal_id: int = Field(
+        None,
+        title="Journal ID",
+        description="A unique ID that identified which journal has this publication",
+    )
+    external_id: constr(max_length=128) = Field(
+        None,
+        title="External ID",
+        description="A unique ID that corresponds to an external identification for this publication",
+    )
+    title: constr(max_length=400) = Field(
         None,
         title="Title",
         description="The title of the article within the publication",
         example="Reintroducing the Current Insights Feature",
     )
-    doi: str = Field(
+    doi: constr(max_length=80) = Field(
         None,
         title="DOI",
         description="Digital Object Identifier",
@@ -71,7 +89,7 @@ class Publication(BaseModel):
     month: int = Field(
         None, title="Month", description="Month of the publication", example="3"
     )
-    pub_type: str = Field(
+    pub_type: constr(max_length=30) = Field(
         None,
         title="Publication Type",
         description="Publication type",
@@ -86,9 +104,9 @@ class Publication(BaseModel):
     fw_citation_impact: float = Field(
         None, title="Citation Impact", description="The impact of this citation (DRAFT)"
     )
-    journal: str = Field(
-        None, title="Journal", description="The name of the publication"
-    )
+
+    class Config:
+        orm_mode = True
 
 
 class Author(BaseModel):
@@ -108,6 +126,9 @@ class Author(BaseModel):
         None, title="Family Name", description="The author's familiy name"
     )
 
+    class Config:
+        orm_mode = True
+
 
 class Dataset(BaseModel):
     """
@@ -121,10 +142,16 @@ class Dataset(BaseModel):
         None, title="Alias", description="The identifying alias or name of a dataset"
     )
 
+    class Config:
+        orm_mode = True
+
 
 class AliasType(str, Enum):
     alias = "alias"
     main = "main"
+
+    class Config:
+        orm_mode = True
 
 
 class Alias(BaseModel):
@@ -139,3 +166,6 @@ class Alias(BaseModel):
     alias_type: AliasType = Field(
         None, title="Alias Type", description="The type of alias. This can be "
     )
+
+    class Config:
+        orm_mode = True
