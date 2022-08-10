@@ -5,6 +5,7 @@ from democratizing.dependencies import get_db
 from democratizing.main import app
 from democratizing import models, schemas
 from democratizing.database import SessionLocal
+from pydantic import BaseModel
 import os
 import json
 
@@ -52,7 +53,16 @@ def integration_db_session():
     yield SessionLocal()
 
 
+def load_schema_from_fixture(schema: BaseModel, fixture: str):
+    with open(os.path.join(os.path.dirname(__file__), f"fixtures/{fixture}"), "r") as f:
+        return schema(**json.load(f))
+
+
 @pytest.fixture
 def topic_schema():
-    with open(os.path.join(os.path.dirname(__file__), "fixtures/topic.json"), "r") as f:
-        yield schemas.Topic(**json.load(f))
+    yield load_schema_from_fixture(schemas.Topic, "topic.json")
+
+
+@pytest.fixture
+def publication_schema():
+    yield load_schema_from_fixture(schemas.Publication, "publication.json")
