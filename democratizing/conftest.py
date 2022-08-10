@@ -3,7 +3,10 @@ from unittest.mock import MagicMock
 from fastapi.testclient import TestClient
 from democratizing.dependencies import get_db
 from democratizing.main import app
-from democratizing import models
+from democratizing import models, schemas
+from democratizing.database import SessionLocal
+import os
+import json
 
 
 @pytest.fixture
@@ -42,3 +45,14 @@ def mock_publication_model():
         "fw_citation_impact": 3.8,
     }
     yield models.Publication(**entry)
+
+
+@pytest.fixture
+def integration_db_session():
+    yield SessionLocal()
+
+
+@pytest.fixture
+def topic_schema():
+    with open(os.path.join(os.path.dirname(__file__), "fixtures/topic.json"), "r") as f:
+        yield schemas.Topic(**json.load(f))
