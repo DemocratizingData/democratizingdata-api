@@ -35,7 +35,7 @@ jobs:
         poetry install
     - name: Run Server-side unit tests and generate coverage report
       run: |
-        poetry run pytest democratizing 
+        poetry run pytest -c unit_test.ini democratizing 
   Server_Side_Linting:
     runs-on: ubuntu-18.04
     steps:
