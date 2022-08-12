@@ -1,7 +1,10 @@
-def apply_limit_offset(query, limit: int | None, offset: int | None):
+from democratizing.dependencies import PaginationParams
+
+
+def apply_limit_offset(query, pagination: PaginationParams):
     result = query
-    if limit:
-        result = result.limit(limit)
-    if offset:
-        result = result.offset(offset)
+    if pagination.limit:
+        result = result.limit(pagination.limit)
+    if pagination.offset:
+        result = result.offset(pagination.offset)
     return result
