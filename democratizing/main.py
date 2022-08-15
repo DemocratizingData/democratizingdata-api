@@ -14,8 +14,12 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 streamHandler.setFormatter(formatter)
 logger.addHandler(streamHandler)
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO")
+SQL_LOGLEVEL = os.environ.get("SQL_LOGLEVEL", "INFO")
 logger.setLevel(LOGLEVEL)
+logging.getLogger("sqlalchemy.engine").setLevel(SQL_LOGLEVEL)
+
 logger.error(f"Log level {LOGLEVEL}")
+logger.error(f"SQLAlchemy Log Level {SQL_LOGLEVEL}")
 
 # Initialize database
 logger.debug("Initializing PostgreSQL connection")

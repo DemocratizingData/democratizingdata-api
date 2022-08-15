@@ -94,3 +94,18 @@ class AgencyRun(Base):
     version = Column(String)
     run_date = Column(Date)
     last_updated_date = Column(DateTime)
+
+
+class Affiliation(Base):
+    __tablename__ = "affiliation"
+
+    id = Column(Integer, primary_key=True, index=True)
+    run_id = Column(Integer)
+    external_id = Column(String)
+    institution_name = Column(String)
+    address = Column(String)
+    city = Column(String)
+    state = Column(String)
+    country_code = Column(String)
+    postal_code = Column(String)
+    last_updated_date = Column(DateTime)

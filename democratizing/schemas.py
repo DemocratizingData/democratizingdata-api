@@ -8,16 +8,15 @@ from enum import Enum
 
 
 class DemocratizingModel(BaseModel):
+    """
+    A basemodel for all schemas
+    """
+
     id: int = Field(
         None,
         title="ID",
         description="A unique ID for this row",
         example="32",
-    )
-    run_id: int = Field(
-        None,
-        title="Run ID",
-        description="A unique ID that identifies which agency run generated this row",
     )
     last_updated_date: datetime = Field(
         None, title="Last Updated Date", description="Timestamp of last update"
@@ -27,7 +26,19 @@ class DemocratizingModel(BaseModel):
         orm_mode = True
 
 
-class Topic(DemocratizingModel):
+class DemocratizingRunModel(DemocratizingModel):
+    """
+    A basemodel for those schemas with a run_id field
+    """
+
+    run_id: int = Field(
+        None,
+        title="Run ID",
+        description="A unique ID that identifies which agency run generated this row",
+    )
+
+
+class Topic(DemocratizingRunModel):
     """
     A searchable topic
     """
@@ -48,7 +59,7 @@ class Topic(DemocratizingModel):
     )
 
 
-class Publication(DemocratizingModel):
+class Publication(DemocratizingRunModel):
     """
     A publication
     """
@@ -98,7 +109,7 @@ class Publication(DemocratizingModel):
     )
 
 
-class Author(DemocratizingModel):
+class Author(DemocratizingRunModel):
     """
     An author
     """
@@ -116,7 +127,7 @@ class Author(DemocratizingModel):
     )
 
 
-class DatasetAlias(DemocratizingModel):
+class DatasetAlias(DemocratizingRunModel):
     """
     A dataset alias
     """
@@ -142,9 +153,6 @@ class Model(DemocratizingModel):
     A run model
     """
 
-    id: int = Field(
-        None, title="Model ID", description="A unique ID that identifies this model"
-    )
     name: constr(max_length=32) = Field(
         None, title="Name", description="The name of this model"
     )
@@ -166,6 +174,41 @@ class AgencyRun(DemocratizingModel):
     agency: constr(max_length=32) = Field(
         None, title="Agency", description="The name of the agency for this run"
     )
+    version: constr(max_length=32) = Field(
+        None, title="Version", description="The version number for this run"
+    )
     run_date: datetime = Field(
         None, title="Run Date", description="The date of this run"
+    )
+
+
+class Affiliation(DemocratizingRunModel):
+    """
+    Institution affiliations
+    """
+
+    external_id: constr(max_length=128) = Field(
+        None,
+        title="External ID",
+        description="An external id for identifying an affiliation",
+    )
+    institution_name: constr(max_length=750) = Field(
+        None,
+        title="Institution Name",
+        description="The name of the institution of this affiliation",
+    )
+    address: constr(max_length=750) = Field(
+        None, title="Address", description="The street address of this affiliation"
+    )
+    city: constr(max_length=128) = Field(
+        None, title="City", description="The name of the city of this affiliation"
+    )
+    state: constr(max_length=128) = Field(
+        None, title="State", description="The state of this affiliation"
+    )
+    country_code: constr(max_length=10) = Field(
+        None, title="Country Code", description="The country code of this affiliation"
+    )
+    postal_code: constr(max_length=32) = Field(
+        None, title="Postal Code", description="The postal code of this affiliation"
     )
