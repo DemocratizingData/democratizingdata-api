@@ -7,7 +7,7 @@ from typing import Union
 from enum import Enum
 
 
-class DemocratizingModel(BaseModel):
+class DemocratizingSchema(BaseModel):
     """
     A basemodel for all schemas
     """
@@ -26,7 +26,7 @@ class DemocratizingModel(BaseModel):
         orm_mode = True
 
 
-class DemocratizingRunModel(DemocratizingModel):
+class DemocratizingRunSchema(DemocratizingSchema):
     """
     A basemodel for those schemas with a run_id field
     """
@@ -38,7 +38,7 @@ class DemocratizingRunModel(DemocratizingModel):
     )
 
 
-class Topic(DemocratizingRunModel):
+class Topic(DemocratizingRunSchema):
     """
     A searchable topic
     """
@@ -59,7 +59,7 @@ class Topic(DemocratizingRunModel):
     )
 
 
-class Publication(DemocratizingRunModel):
+class Publication(DemocratizingRunSchema):
     """
     A publication
     """
@@ -109,7 +109,7 @@ class Publication(DemocratizingRunModel):
     )
 
 
-class Author(DemocratizingRunModel):
+class Author(DemocratizingRunSchema):
     """
     An author
     """
@@ -127,7 +127,7 @@ class Author(DemocratizingRunModel):
     )
 
 
-class DatasetAlias(DemocratizingRunModel):
+class DatasetAlias(DemocratizingRunSchema):
     """
     A dataset alias
     """
@@ -148,7 +148,7 @@ class DatasetAlias(DemocratizingRunModel):
     )
 
 
-class Model(DemocratizingModel):
+class Model(DemocratizingSchema):
     """
     A run model
     """
@@ -166,7 +166,7 @@ class Model(DemocratizingModel):
     )
 
 
-class AgencyRun(DemocratizingModel):
+class AgencyRun(DemocratizingSchema):
     """
     An agency run
     """
@@ -182,7 +182,7 @@ class AgencyRun(DemocratizingModel):
     )
 
 
-class Affiliation(DemocratizingRunModel):
+class Affiliation(DemocratizingRunSchema):
     """
     Institution affiliations
     """

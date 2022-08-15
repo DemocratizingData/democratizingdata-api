@@ -15,5 +15,5 @@ routers = [
     dataset_aliases_router,
     agency_runs_router,
     affiliations_router,
-    datasets_router
+    datasets_router,
 ]
