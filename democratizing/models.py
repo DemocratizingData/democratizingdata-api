@@ -1,4 +1,13 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Float, Integer, String, DateTime
+from sqlalchemy import (
+    Boolean,
+    Column,
+    ForeignKey,
+    Float,
+    Integer,
+    String,
+    DateTime,
+    Date,
+)
 from sqlalchemy.orm import relationship
 
 from democratizing.database import Base
@@ -74,4 +83,14 @@ class DatasetAlias(Base):
     alias = Column(String)
     alias_type = Column(String)
     url = Column(String)
+    last_updated_date = Column(DateTime)
+
+
+class AgencyRun(Base):
+    __tablename__ = "agency_run"
+
+    id = Column(Integer, primary_key=True, index=True)
+    agency = Column(String)
+    version = Column(String)
+    run_date = Column(Date)
     last_updated_date = Column(DateTime)

@@ -56,13 +56,3 @@ def integration_db_session():
 def load_schema_from_fixture(schema: BaseModel, fixture: str):
     with open(os.path.join(os.path.dirname(__file__), f"fixtures/{fixture}"), "r") as f:
         return schema(**json.load(f))
-
-
-@pytest.fixture
-def topic_schema():
-    yield load_schema_from_fixture(schemas.Topic, "topic.json")
-
-
-@pytest.fixture
-def publication_schema():
-    yield load_schema_from_fixture(schemas.Publication, "publication.json")

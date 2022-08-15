@@ -7,22 +7,31 @@ from typing import Union
 from enum import Enum
 
 
-class Topic(BaseModel):
-    """
-    A searchable topic
-    """
-
+class DemocratizingModel(BaseModel):
     id: int = Field(
         None,
-        title="Topic ID",
-        description="A unique ID that can be used to retrieve topics",
+        title="ID",
+        description="A unique ID for this row",
         example="32",
     )
     run_id: int = Field(
         None,
         title="Run ID",
-        description="A unique ID that identifies which agency run generated this topic",
+        description="A unique ID that identifies which agency run generated this row",
     )
+    last_updated_date: datetime = Field(
+        None, title="Last Updated Date", description="Timestamp of last update"
+    )
+
+    class Config:
+        orm_mode = True
+
+
+class Topic(DemocratizingModel):
+    """
+    A searchable topic
+    """
+
     keywords: constr(max_length=1028) = Field(
         None,
         title="Keywords",
@@ -37,30 +46,13 @@ class Topic(BaseModel):
     prominence: Union[float, NoneType] = Field(
         None, title="Score", description="Relevance score"
     )
-    last_updated_date: datetime = Field(
-        None, title="Last Updated Date", description="Timestamp of last update"
-    )
-
-    class Config:
-        orm_mode = True
 
 
-class Publication(BaseModel):
+class Publication(DemocratizingModel):
     """
     A publication
     """
 
-    id: int = Field(
-        None,
-        title="Publication ID",
-        description="A unique ID that can be used to retrieve publications",
-        example="366",
-    )
-    run_id: int = Field(
-        None,
-        title="Run ID",
-        description="A unique ID that identifies which agency run generated this publication",
-    )
     journal_id: int = Field(
         None,
         title="Journal ID",
@@ -105,20 +97,12 @@ class Publication(BaseModel):
         None, title="Citation Impact", description="The impact of this citation (DRAFT)"
     )
 
-    class Config:
-        orm_mode = True
 
-
-class Author(BaseModel):
+class Author(DemocratizingModel):
     """
     An author
     """
 
-    id: int = Field(
-        None,
-        title="Author",
-        description="The unique ID of an author",
-    )
     external_d: Union[constr(max_length=128), NoneType] = Field(
         None,
         title="External ID",
@@ -130,29 +114,13 @@ class Author(BaseModel):
     family_name: constr(max_length=150) = Field(
         None, title="Family Name", description="The author's familiy name"
     )
-    last_updated_date: datetime = Field(
-        None, title="Last Updated Date", description="Timestamp of last update"
-    )
-
-    class Config:
-        orm_mode = True
 
 
-class DatasetAlias(BaseModel):
+class DatasetAlias(DemocratizingModel):
     """
     A dataset alias
     """
 
-    id: int = Field(
-        None,
-        title="Dataset ID",
-        description="The unique ID of this dataset record. For joins to other schema, please use alias_id",
-    )
-    run_id: int = Field(
-        None,
-        title="Run ID",
-        description="A unique ID that identifies which agency run generated this dataset",
-    )
     alias_id: int = Field(
         None,
         title="Alias ID",
@@ -167,15 +135,9 @@ class DatasetAlias(BaseModel):
     url: constr(max_length=2048) = Field(
         None, title="URL", description="The URL for retrieving this dataset"
     )
-    last_updated_date: datetime = Field(
-        None, title="Last Updated Date", description="Timestamp of last update"
-    )
-
-    class Config:
-        orm_mode = True
 
 
-class Model(BaseModel):
+class Model(DemocratizingModel):
     """
     A run model
     """
@@ -194,9 +156,16 @@ class Model(BaseModel):
     description: constr(max_length=2048) = Field(
         None, title="Description", description="A short description of this model"
     )
-    last_updated_date: datetime = Field(
-        None, title="Last Updated Date", description="Timestamp of last update"
-    )
 
-    class Config:
-        orm_mode = True
+
+class AgencyRun(DemocratizingModel):
+    """
+    An agency run
+    """
+
+    agency: constr(max_length=32) = Field(
+        None, title="Agency", description="The name of the agency for this run"
+    )
+    run_date: datetime = Field(
+        None, title="Run Date", description="The date of this run"
+    )
