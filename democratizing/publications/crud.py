@@ -7,5 +7,5 @@ import logging
 logger = logging.getLogger()
 
 
-def get_publications(pagination: PaginationParams, db: Session):
+def get_publications(pagination: PaginationParams, db: Session) -> list[Publication]:
     return apply_pagination(db.query(Publication), pagination).all()

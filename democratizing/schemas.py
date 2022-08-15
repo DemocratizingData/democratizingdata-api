@@ -114,16 +114,24 @@ class Author(BaseModel):
     An author
     """
 
-    author_id: int = Field(
+    id: int = Field(
         None,
         title="Author",
         description="The unique ID of an author",
     )
-    given_name: str = Field(
+    external_d: Union[constr(max_length=128), NoneType] = Field(
+        None,
+        title="External ID",
+        description="A unique external ID for this author",
+    )
+    given_name: constr(max_length=150) = Field(
         None, title="Given Name", description="The author's given name"
     )
-    family_name: str = Field(
+    family_name: constr(max_length=150) = Field(
         None, title="Family Name", description="The author's familiy name"
+    )
+    last_updated_date: datetime = Field(
+        None, title="Last Updated Date", description="Timestamp of last update"
     )
 
     class Config:

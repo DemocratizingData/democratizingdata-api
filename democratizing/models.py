@@ -43,6 +43,17 @@ class PublicationTopic(Base):
     last_updated_date = Column(DateTime)
 
 
+class Author(Base):
+    __tablename__ = "author"
+
+    id = Column(Integer, primary_key=True, index=True)
+    run_id = Column(Integer)
+    external_id = Column(String)
+    given_name = Column(String)
+    family_name = Column(String)
+    last_updated_date = Column(String)
+
+
 class Model(Base):
     __tablename__ = "model"
 
