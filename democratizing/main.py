@@ -30,6 +30,10 @@ tags_metadata = [
         "name": "authors",
         "description": "Operations with authors",
     },
+    {
+        "name": "dataset_aliases",
+        "description": "Operations with dataset aliases"
+    },
     {"name": "models", "description": "Operations with run models"},
     {"name": "datasets", "description": "Operations with datasets"},
     {"name": "publications", "description": "Operations with publications"},

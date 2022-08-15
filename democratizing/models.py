@@ -62,3 +62,16 @@ class Model(Base):
     github_commit_url = Column(String)
     description = Column(String)
     last_updated_date = Column(DateTime)
+
+
+class DatasetAlias(Base):
+    __tablename__ = "dataset_alias"
+
+    id = Column(Integer, primary_key=True, index=True)
+    run_id = Column(Integer)
+    parent_alias_id = Column(Integer)
+    alias_id = Column(Integer)
+    alias = Column(String)
+    alias_type = Column(String)
+    url = Column(String)
+    last_updated_date = Column(DateTime)

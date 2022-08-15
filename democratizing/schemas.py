@@ -138,16 +138,33 @@ class Author(BaseModel):
         orm_mode = True
 
 
-class Dataset(BaseModel):
+class DatasetAlias(BaseModel):
     """
-    A dataset
+    A dataset alias
     """
 
-    alias_id: int = Field(
-        None, title="Dataset ID", description="The unique ID of a dataset"
+    id: int = Field(
+        None, title="Dataset ID", description="The unique ID of this dataset record. For joins to other schema, please use alias_id"
     )
-    alias: str = Field(
+    run_id: int = Field(
+        None,
+        title="Run ID",
+        description="A unique ID that identifies which agency run generated this dataset",
+    )
+    alias_id: int = Field(
+        None, title="Alias ID", description="The alias ID of a dataset, for identifying this dataset's usage in other tables"
+    )
+    alias: constr(max_length=160) = Field(
         None, title="Alias", description="The identifying alias or name of a dataset"
+    )
+    alias_type: constr(max_length=50) = Field(
+        None, title="Alias Type", description="The type of alias for this dataset"
+    )
+    url: constr(max_length=2048) = Field(
+        None, title="URL", description="The URL for retrieving this dataset"
+    )
+    last_updated_date: datetime = Field(
+        None, title="Last Updated Date", description="Timestamp of last update"
     )
 
     class Config:
