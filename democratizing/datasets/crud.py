@@ -20,6 +20,6 @@ def get_datasets(pagination: PaginationParams, db: Session):
             DatasetAlias.last_updated_date,
             AgencyRun.agency,
             AgencyRun.version,
-        ).join(AgencyRun, DatasetAlias.run_id == AgencyRun.id),
+        ),
         pagination,
     ).all()

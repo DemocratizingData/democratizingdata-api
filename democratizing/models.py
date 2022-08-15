@@ -8,7 +8,7 @@ from sqlalchemy import (
     DateTime,
     Date,
 )
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, declared_attr
 
 from democratizing.database import Base
 
@@ -31,7 +31,9 @@ class DemocratizingRunModel(DemocratizingModel):
 
     __abstract__ = True
 
-    run_id = Column(Integer)
+    @declared_attr
+    def run_id(self):
+        return Column(Integer, ForeignKey("agency_run.id"))
 
 
 class Topic(DemocratizingRunModel):
@@ -108,3 +110,10 @@ class Affiliation(DemocratizingRunModel):
     state = Column(String)
     country_code = Column(String)
     postal_code = Column(String)
+
+
+class Asjc(DemocratizingModel):
+    __tablename__ = "asjc"
+
+    code = Column(Integer)
+    label = Column(String)
