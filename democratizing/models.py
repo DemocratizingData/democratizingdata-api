@@ -77,7 +77,7 @@ class DatasetAlias(Base):
     __tablename__ = "dataset_alias"
 
     id = Column(Integer, primary_key=True, index=True)
-    run_id = Column(Integer)
+    run_id = Column(Integer, ForeignKey("agency_run.id"))
     parent_alias_id = Column(Integer)
     alias_id = Column(Integer)
     alias = Column(String)

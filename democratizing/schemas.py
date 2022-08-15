@@ -212,3 +212,7 @@ class Affiliation(DemocratizingRunModel):
     postal_code: constr(max_length=32) = Field(
         None, title="Postal Code", description="The postal code of this affiliation"
     )
+
+
+class Dataset(DatasetAlias, AgencyRun):
+    pass
