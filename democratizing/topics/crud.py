@@ -11,7 +11,9 @@ def get_topics(pagination: PaginationParams, db: Session) -> list[Topic]:
     return apply_pagination(db.query(Topic), pagination).all()
 
 
-def get_topic_publications(topic_id: int, pagination: PaginationParams, db: Session) -> list[Publication]:
+def get_topic_publications(
+    topic_id: int, pagination: PaginationParams, db: Session
+) -> list[Publication]:
     return apply_pagination(
         db.query(Publication)
         .join(PublicationTopic)

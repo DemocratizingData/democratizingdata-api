@@ -9,5 +9,5 @@ routers = [
     publications_router,
     models_router,
     authors_router,
-    dataset_aliases_router
+    dataset_aliases_router,
 ]

@@ -7,5 +7,7 @@ import logging
 logger = logging.getLogger()
 
 
-def get_dataset_aliases(pagination: PaginationParams, db: Session) -> list[DatasetAlias]:
+def get_dataset_aliases(
+    pagination: PaginationParams, db: Session
+) -> list[DatasetAlias]:
     return apply_pagination(db.query(DatasetAlias), pagination).all()

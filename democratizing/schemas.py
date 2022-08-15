@@ -144,7 +144,9 @@ class DatasetAlias(BaseModel):
     """
 
     id: int = Field(
-        None, title="Dataset ID", description="The unique ID of this dataset record. For joins to other schema, please use alias_id"
+        None,
+        title="Dataset ID",
+        description="The unique ID of this dataset record. For joins to other schema, please use alias_id",
     )
     run_id: int = Field(
         None,
@@ -152,7 +154,9 @@ class DatasetAlias(BaseModel):
         description="A unique ID that identifies which agency run generated this dataset",
     )
     alias_id: int = Field(
-        None, title="Alias ID", description="The alias ID of a dataset, for identifying this dataset's usage in other tables"
+        None,
+        title="Alias ID",
+        description="The alias ID of a dataset, for identifying this dataset's usage in other tables",
     )
     alias: constr(max_length=160) = Field(
         None, title="Alias", description="The identifying alias or name of a dataset"
@@ -165,31 +169,6 @@ class DatasetAlias(BaseModel):
     )
     last_updated_date: datetime = Field(
         None, title="Last Updated Date", description="Timestamp of last update"
-    )
-
-    class Config:
-        orm_mode = True
-
-
-class AliasType(str, Enum):
-    alias = "alias"
-    main = "main"
-
-    class Config:
-        orm_mode = True
-
-
-class Alias(BaseModel):
-    """
-    A dataset alias
-    """
-
-    alias_id: int = Field(
-        None, title="Alias ID", description="A unique ID that corresponds to an alias"
-    )
-    alias: str = Field(None, title="Alias", description="The name of a dataset alias")
-    alias_type: AliasType = Field(
-        None, title="Alias Type", description="The type of alias. This can be "
     )
 
     class Config:
