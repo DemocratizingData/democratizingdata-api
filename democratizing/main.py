@@ -6,6 +6,7 @@ import logging
 import sys
 from democratizing.topics.router import router as topics_router
 from democratizing.publications.router import router as publications_router
+from democratizing.run_models.router import router as models_router
 
 # Set up logging
 logger = logging.getLogger()
@@ -30,6 +31,7 @@ tags_metadata = [
         "name": "authors",
         "description": "Operations with authors",
     },
+    {"name": "models", "description": "Operations with run models"},
     {"name": "datasets", "description": "Operations with datasets"},
     {"name": "publications", "description": "Operations with publications"},
 ]
@@ -53,3 +55,4 @@ app.add_middleware(
 # Include subroutes
 app.include_router(topics_router)
 app.include_router(publications_router)
+app.include_router(models_router)

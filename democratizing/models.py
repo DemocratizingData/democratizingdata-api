@@ -41,3 +41,13 @@ class PublicationTopic(Base):
     topic_id = Column(Integer, ForeignKey("topic.id"))
     score = Column(String)
     last_updated_date = Column(DateTime)
+
+
+class Model(Base):
+    __tablename__ = "model"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    github_commit_url = Column(String)
+    description = Column(String)
+    last_updated_date = Column(DateTime)

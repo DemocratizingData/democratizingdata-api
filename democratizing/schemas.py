@@ -169,3 +169,30 @@ class Alias(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class Model(BaseModel):
+    """
+    A run model
+    """
+
+    id: int = Field(
+        None, title="Model ID", description="A unique ID that identifies this model"
+    )
+    name: constr(max_length=32) = Field(
+        None, title="Name", description="The name of this model"
+    )
+    github_commit_url: constr(max_length=1024) = Field(
+        None,
+        title="Github Commit URL",
+        description="The URL for the GitHub commit that contains this model",
+    )
+    description: constr(max_length=2048) = Field(
+        None, title="Description", description="A short description of this model"
+    )
+    last_updated_date: datetime = Field(
+        None, title="Last Updated Date", description="Timestamp of last update"
+    )
+
+    class Config:
+        orm_mode = True
