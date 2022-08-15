@@ -216,3 +216,10 @@ class Affiliation(DemocratizingRunSchema):
 
 class Dataset(DatasetAlias, AgencyRun):
     pass
+
+
+class Asjc(DemocratizingRunSchema):
+    code: int = Field(None, title="Code", description="ASJC Code")
+    label: constr(max_length=1024) = Field(
+        None, title="Label", description="A label for this ASJC"
+    )

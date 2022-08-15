@@ -39,6 +39,7 @@ tags_metadata = [
     {"name": "models", "description": "Operations with run models"},
     {"name": "datasets", "description": "Operations with datasets"},
     {"name": "publications", "description": "Operations with publications"},
+    {"name": "asjcs", "description": "Operations with ASJCs"},
 ]
 
 
