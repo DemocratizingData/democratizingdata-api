@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 import logging
-from democratizing import schemas, dependencies
+from democratizing import schemas
+from democratizing.dependencies import get_db, get_pagination_params, PaginationParams
 from democratizing.publications import crud
 from sqlalchemy.orm import Session
 
@@ -19,8 +20,7 @@ router = APIRouter(
 
 @router.get("", response_model=list[schemas.Publication])
 def get_publications(
-    limit: int | None = None,
-    offset: int | None = None,
-    db: Session = Depends(dependencies.get_db),
+    pagination: PaginationParams = Depends(get_pagination_params),
+    db: Session = Depends(get_db),
 ):
-    return crud.get_publications(limit, offset, db)
+    return crud.get_publications(pagination, db)

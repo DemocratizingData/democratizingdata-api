@@ -1,4 +1,4 @@
-from democratizing.models import Publication, PublicationTopic, Topic
+from democratizing.models import PublicationTopic, Topic
 
 
 def test_topics(test_client, mock_db):
