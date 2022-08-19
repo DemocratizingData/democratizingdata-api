@@ -20,6 +20,7 @@ from democratizing.pda_models.router import router as pda_models_router
 from democratizing.author_affiliations.router import (
     router as author_affiliations_router,
 )
+from democratizing.issns.router import router as issns_router
 
 routers = [
     topics_router,
@@ -38,4 +39,5 @@ routers = [
     publication_dataset_aliases_router,
     pda_models_router,
     author_affiliations_router,
+    issns_router,
 ]

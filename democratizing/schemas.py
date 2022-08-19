@@ -329,3 +329,12 @@ class AuthorAffiliation(DemocratizingRunSchema):
         title="Affiliation ID",
         description="The ID of the affiliation for this record",
     )
+
+
+class ISSN(DemocratizingRunSchema):
+    journal_id: Union[int, NoneType] = Field(
+        None, title="Journal ID", description="The ID of the journal for this record"
+    )
+    ISSN: Union[constr(max_length=13), NoneType] = Field(
+        None, title="ISSN", description="ISSN"
+    )

@@ -193,3 +193,10 @@ class AuthorAffiliation(DemocratizingRunModel):
 
     publication_author_id = Column(Integer, ForeignKey("publication_author.id"))
     affiliation_id = Column(Integer, ForeignKey("affiliation.id"))
+
+
+class ISSN(DemocratizingRunModel):
+    __tablename__ = "issn"
+
+    journal_id = Column(Integer)
+    ISSN = Column(String)
