@@ -138,3 +138,11 @@ class Journal(DemocratizingRunModel, DemocratizingExternalModel):
     publisher_id = Column(Integer, ForeignKey("publisher.id"))
     title = Column(String)
     cite_score = Column(Float)
+
+
+class PublicationAuthor(DemocratizingRunModel):
+    __tablename__ = "publication_author"
+
+    publication_id = Column(Integer, ForeignKey("publication.id"))
+    author_id = Column(Integer, ForeignKey("author.id"))
+    author_position = Column(Integer)

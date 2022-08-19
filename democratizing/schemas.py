@@ -245,3 +245,21 @@ class Journal(DemocratizingRunSchema, DemocratizingExternalSchema):
     cite_score: float = Field(
         None, title="Cite Score", description="The citation score of this journal"
     )
+
+
+class PublicationAuthor(DemocratizingRunSchema):
+    publication_id: int = Field(
+        None,
+        title="Publication ID",
+        description="The ID of the associated publication for this record"
+    )
+    author_id: int = Field(
+        None,
+        title="Author ID",
+        description="The ID of the associated author for this record"
+    )
+    author_position: Union[int, NoneType] = Field(
+        None,
+        title="Author Position",
+        description="The author position"
+    )
