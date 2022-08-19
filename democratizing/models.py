@@ -186,3 +186,10 @@ class PdaModel(DemocratizingRunModel):
     )
     model_id = Column(Integer, ForeignKey("model.id"))
     score = Column(Float)
+
+
+class AuthorAffiliation(DemocratizingRunModel):
+    __tablename__ = "author_affiliation"
+
+    publication_author_id = Column(Integer, ForeignKey("publication_author.id"))
+    affiliation_id = Column(Integer, ForeignKey("affiliation.id"))

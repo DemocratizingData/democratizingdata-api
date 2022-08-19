@@ -316,3 +316,16 @@ class PdaModel(DemocratizingRunSchema):
     score: Union[float, NoneType] = Field(
         None, title="Score", description="The model's score"
     )
+
+
+class AuthorAffiliation(DemocratizingRunSchema):
+    publication_author_id: Union[int, NoneType] = Field(
+        None,
+        title="Publication Author ID",
+        description="The ID of the publication author for this record",
+    )
+    affiliation_id: Union[int, NoneType] = Field(
+        None,
+        title="Affiliation ID",
+        description="The ID of the affiliation for this record",
+    )
