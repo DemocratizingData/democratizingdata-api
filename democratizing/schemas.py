@@ -304,3 +304,15 @@ class PublicationDatasetAlias(DemocratizingRunSchema, DemocratizingPublicationId
     fuzzy_score: Union[float, NoneType] = Field(
         None, title="Fuzzy Score", description="The fuzzy score"
     )
+
+
+class PdaModel(DemocratizingRunSchema):
+    publication_dataset_alias_id: int = Field(
+        None,
+        title="Publication Dataset Alias ID",
+        description="The ID of the publication dataset alias associated with this record",
+    )
+    model_id: int = Field(None, title="Model ID", description="The model's ID")
+    score: Union[float, NoneType] = Field(
+        None, title="Score", description="The model's score"
+    )

@@ -16,6 +16,7 @@ from democratizing.publication_asjcs.router import router as publication_asjcs_r
 from democratizing.publication_dataset_aliases.router import (
     router as publication_dataset_aliases_router,
 )
+from democratizing.pda_models.router import router as pda_models_router
 
 routers = [
     topics_router,
@@ -32,4 +33,5 @@ routers = [
     publication_authors_router,
     publication_asjcs_router,
     publication_dataset_aliases_router,
+    pda_models_router,
 ]

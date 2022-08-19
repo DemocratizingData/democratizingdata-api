@@ -1,3 +1,4 @@
+from re import I
 from sqlalchemy import (
     Boolean,
     Column,
@@ -175,3 +176,13 @@ class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdM
     snippet = Column(String)
     is_fuzzy = Column(Boolean)
     fuzzy_score = Column(Float)
+
+
+class PdaModel(DemocratizingRunModel):
+    __tablename__ = "pda_model"
+
+    publication_dataset_alias_id = Column(
+        Integer, ForeignKey("publication_dataset_alias.id")
+    )
+    model_id = Column(Integer, ForeignKey("model.id"))
+    score = Column(Float)

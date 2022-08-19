@@ -51,6 +51,7 @@ tags_metadata = [
         "name": "publication_dataset_aliases",
         "description": "Operations with Publication Dataset Aliases",
     },
+    {"name": "pda_models", "description": "Operations with PDA Models"},
 ]
 
 
