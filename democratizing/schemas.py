@@ -235,7 +235,9 @@ class Publisher(DemocratizingRunSchema, DemocratizingExternalSchema):
 
 class Journal(DemocratizingRunSchema, DemocratizingExternalSchema):
     publisher_id: Union[int, NoneType] = Field(
-        None, title="Publisher ID", description="The ID of the associated publisher for this journal"
+        None,
+        title="Publisher ID",
+        description="The ID of the associated publisher for this journal",
     )
     title: constr(max_length=1028) = Field(
         None, title="Title", description="The title of this journal"

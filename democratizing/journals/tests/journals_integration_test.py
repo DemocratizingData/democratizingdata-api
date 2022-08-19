@@ -7,4 +7,4 @@ def test_get_journals(integration_db_session):
     result = Journal.from_orm(
         get_journals(PaginationParams(limit=1, offet=0), integration_db_session)[0]
     )
-    assert result.id is not None
+    assert result.title is not None

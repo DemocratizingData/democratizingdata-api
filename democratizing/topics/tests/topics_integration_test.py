@@ -7,7 +7,7 @@ def test_get_topics(integration_db_session):
     result = Topic.from_orm(
         get_topics(PaginationParams(limit=1, offset=0), integration_db_session)[0]
     )
-    assert result.id is not None
+    assert result.keywords is not None
 
 
 def test_get_topic_publications(integration_db_session):
@@ -16,4 +16,4 @@ def test_get_topic_publications(integration_db_session):
             1, PaginationParams(limit=1, offset=0), integration_db_session
         )[0]
     )
-    assert result.id is not None
+    assert result.title is not None

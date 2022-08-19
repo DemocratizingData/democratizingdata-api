@@ -21,5 +21,5 @@ routers = [
     datasets_router,
     asjcs_router,
     publishers_router,
-    journals_router
+    journals_router,
 ]

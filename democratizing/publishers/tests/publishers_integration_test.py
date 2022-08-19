@@ -7,4 +7,4 @@ def test_get_publishers(integration_db_session):
     result = Publisher.from_orm(
         get_publishers(PaginationParams(limit=1, offet=0), integration_db_session)[0]
     )
-    assert result.id is not None
+    assert result.name is not None

@@ -7,4 +7,4 @@ def test_get_asjcs(integration_db_session):
     result = Asjc.from_orm(
         get_asjcs(PaginationParams(limit=1, offet=0), integration_db_session)[0]
     )
-    assert result.id is not None
+    assert result.code is not None

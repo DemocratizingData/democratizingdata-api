@@ -7,4 +7,4 @@ def test_get_models(integration_db_session):
     result = Model.from_orm(
         get_models(PaginationParams(limit=1, offset=0), integration_db_session)[0]
     )
-    assert result.id is not None
+    assert result.name is not None
