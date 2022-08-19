@@ -50,6 +50,18 @@ class DemocratizingExternalSchema(BaseModel):
     )
 
 
+class DemocratizingPublicationIdSchema(BaseModel):
+    """
+    A mixin for schemas that have a publication_id field
+    """
+
+    publication_id: int = Field(
+        None,
+        title="Publication ID",
+        description="The ID of the associated publication for this record",
+    )
+
+
 class Topic(DemocratizingRunSchema):
     """
     A searchable topic
@@ -247,12 +259,7 @@ class Journal(DemocratizingRunSchema, DemocratizingExternalSchema):
     )
 
 
-class PublicationAuthor(DemocratizingRunSchema):
-    publication_id: int = Field(
-        None,
-        title="Publication ID",
-        description="The ID of the associated publication for this record",
-    )
+class PublicationAuthor(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
     author_id: int = Field(
         None,
         title="Author ID",
@@ -263,14 +270,37 @@ class PublicationAuthor(DemocratizingRunSchema):
     )
 
 
-class PublicationAsjc(DemocratizingRunSchema):
-    publication_id: int = Field(
-        None,
-        title="Publication ID",
-        description="The ID of the associated publication for this record",
-    )
+class PublicationAsjc(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
     asjc_id: int = Field(
         None,
         title="ASJC ID",
         description="The ID of the associated asjc for this record",
+    )
+
+
+class PublicationDatasetAlias(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
+    elsevier_id: int = Field(
+        None, title="Elsevier ID", description="The elsevier ID for this record"
+    )
+    dataset_alias_id: Union[int, NoneType] = Field(
+        None,
+        title="Dataset Alias ID",
+        description="The ID of the associated dataset alias for this record",
+    )
+    alias_id: Union[int, NoneType] = Field(
+        None,
+        title="Alias ID",
+        description="The ID of the associated alias for this record",
+    )
+    mention_candidate: constr(max_length=1028) = Field(
+        None, title="Mention Candidate", description="The mention candidate"
+    )
+    snippet: constr(max_length=2048) = Field(
+        None, title="Snippet", description="A snippet of text data"
+    )
+    is_fuzzy: Union[bool, NoneType] = Field(
+        None, title="Is Fuzzy", description="Flag indicating if this record is fuzzy"
+    )
+    fuzzy_score: Union[float, NoneType] = Field(
+        None, title="Fuzzy Score", description="The fuzzy score"
     )

@@ -47,6 +47,10 @@ tags_metadata = [
         "description": "Operations with Publication Authors",
     },
     {"name": "publication_asjcs", "description": "Operations with Publication ASJCs"},
+    {
+        "name": "publication_dataset_aliases",
+        "description": "Operations with Publication Dataset Aliases",
+    },
 ]
 
 

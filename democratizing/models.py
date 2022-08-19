@@ -140,16 +140,38 @@ class Journal(DemocratizingRunModel, DemocratizingExternalModel):
     cite_score = Column(Float)
 
 
-class PublicationAuthor(DemocratizingRunModel):
+class DemocratizingPublicationIdModel(DemocratizingModel):
+    """
+    A mixin for publication ids
+    """
+
+    __abstract__ = True
+
+    @declared_attr
+    def publication_id(self):
+        return Column(Integer, ForeignKey("publication.id"))
+
+
+class PublicationAuthor(DemocratizingRunModel, DemocratizingPublicationIdModel):
     __tablename__ = "publication_author"
 
-    publication_id = Column(Integer, ForeignKey("publication.id"))
     author_id = Column(Integer, ForeignKey("author.id"))
     author_position = Column(Integer)
 
 
-class PublicationAsjc(DemocratizingRunModel):
+class PublicationAsjc(DemocratizingRunModel, DemocratizingPublicationIdModel):
     __tablename__ = "publication_asjc"
 
-    publication_id = Column(Integer, ForeignKey("publication.id"))
     asjc_id = Column(Integer, ForeignKey("asjc.id"))
+
+
+class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdModel):
+    __tablename__ = "publication_dataset_alias"
+
+    elsevier_id = Column(Integer)
+    dataset_alias_id = Column(Integer, ForeignKey("dataset_alias.id"))
+    alias_id = Column(Integer)
+    mention_candidate = Column(String)
+    snippet = Column(String)
+    is_fuzzy = Column(Boolean)
+    fuzzy_score = Column(Float)
