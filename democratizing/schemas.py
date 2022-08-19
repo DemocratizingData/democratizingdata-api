@@ -231,3 +231,15 @@ class Publisher(DemocratizingRunSchema, DemocratizingExternalSchema):
     name: Union[constr(max_length=120), NoneType] = Field(
         None, title="Publisher", description="The name of a publisher"
     )
+
+
+class Journal(DemocratizingRunSchema, DemocratizingExternalSchema):
+    publisher_id: Union[int, NoneType] = Field(
+        None, title="Publisher ID", description="The ID of the associated publisher for this journal"
+    )
+    title: constr(max_length=1028) = Field(
+        None, title="Title", description="The title of this journal"
+    )
+    cite_score: float = Field(
+        None, title="Cite Score", description="The citation score of this journal"
+    )

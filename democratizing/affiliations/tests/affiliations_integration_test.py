@@ -7,4 +7,4 @@ def test_get_affiliations(integration_db_session):
     result = Affiliation.from_orm(
         get_affiliations(PaginationParams(limit=1, offet=0), integration_db_session)[0]
     )
-    assert result.id is not None
+    assert result.institution_name is not None
