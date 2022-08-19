@@ -38,6 +38,18 @@ class DemocratizingRunSchema(DemocratizingSchema):
     )
 
 
+class DemocratizingExternalSchema(BaseModel):
+    """
+    A mixin for schemas that have an external_id field
+    """
+
+    external_id: Union[constr(max_length=128), NoneType] = Field(
+        None,
+        title="External ID",
+        description="An ID for identifying this record in an external data source"
+    )
+
+
 class Topic(DemocratizingRunSchema):
     """
     A searchable topic
@@ -59,7 +71,7 @@ class Topic(DemocratizingRunSchema):
     )
 
 
-class Publication(DemocratizingRunSchema):
+class Publication(DemocratizingRunSchema, DemocratizingExternalSchema):
     """
     A publication
     """
@@ -68,11 +80,6 @@ class Publication(DemocratizingRunSchema):
         None,
         title="Journal ID",
         description="A unique ID that identified which journal has this publication",
-    )
-    external_id: constr(max_length=128) = Field(
-        None,
-        title="External ID",
-        description="A unique ID that corresponds to an external identification for this publication",
     )
     title: constr(max_length=400) = Field(
         None,
@@ -109,16 +116,11 @@ class Publication(DemocratizingRunSchema):
     )
 
 
-class Author(DemocratizingRunSchema):
+class Author(DemocratizingRunSchema, DemocratizingExternalSchema):
     """
     An author
     """
 
-    external_d: Union[constr(max_length=128), NoneType] = Field(
-        None,
-        title="External ID",
-        description="A unique external ID for this author",
-    )
     given_name: constr(max_length=150) = Field(
         None, title="Given Name", description="The author's given name"
     )
@@ -137,13 +139,16 @@ class DatasetAlias(DemocratizingRunSchema):
         title="Alias ID",
         description="The alias ID of a dataset, for identifying this dataset's usage in other tables",
     )
-    alias: constr(max_length=160) = Field(
+    alias: Union[constr(max_length=160), NoneType] = Field(
         None, title="Alias", description="The identifying alias or name of a dataset"
     )
-    alias_type: constr(max_length=50) = Field(
+    parent_alias_id: Union[int, NoneType] = Field(
+        None, title="Parent Alias ID", description="If this dataset alias is a child, the parent_alias_id field identifies the parent alias"
+    )
+    alias_type: Union[constr(max_length=50), NoneType] = Field(
         None, title="Alias Type", description="The type of alias for this dataset"
     )
-    url: constr(max_length=2048) = Field(
+    url: Union[constr(max_length=2048), NoneType] = Field(
         None, title="URL", description="The URL for retrieving this dataset"
     )
 
@@ -156,12 +161,12 @@ class Model(DemocratizingSchema):
     name: constr(max_length=32) = Field(
         None, title="Name", description="The name of this model"
     )
-    github_commit_url: constr(max_length=1024) = Field(
+    github_commit_url: Union[constr(max_length=1024), NoneType] = Field(
         None,
         title="Github Commit URL",
         description="The URL for the GitHub commit that contains this model",
     )
-    description: constr(max_length=2048) = Field(
+    description: Union[constr(max_length=2048), NoneType] = Field(
         None, title="Description", description="A short description of this model"
     )
 
@@ -177,39 +182,34 @@ class AgencyRun(DemocratizingSchema):
     version: constr(max_length=32) = Field(
         None, title="Version", description="The version number for this run"
     )
-    run_date: datetime = Field(
+    run_date: Union[datetime, NoneType] = Field(
         None, title="Run Date", description="The date of this run"
     )
 
 
-class Affiliation(DemocratizingRunSchema):
+class Affiliation(DemocratizingRunSchema, DemocratizingExternalSchema):
     """
     Institution affiliations
     """
 
-    external_id: constr(max_length=128) = Field(
-        None,
-        title="External ID",
-        description="An external id for identifying an affiliation",
-    )
-    institution_name: constr(max_length=750) = Field(
+    institution_name: Union[constr(max_length=750), NoneType] = Field(
         None,
         title="Institution Name",
         description="The name of the institution of this affiliation",
     )
-    address: constr(max_length=750) = Field(
+    address: Union[constr(max_length=750), NoneType] = Field(
         None, title="Address", description="The street address of this affiliation"
     )
-    city: constr(max_length=128) = Field(
+    city: Union[constr(max_length=128), NoneType] = Field(
         None, title="City", description="The name of the city of this affiliation"
     )
-    state: constr(max_length=128) = Field(
+    state: Union[constr(max_length=128), NoneType] = Field(
         None, title="State", description="The state of this affiliation"
     )
-    country_code: constr(max_length=10) = Field(
+    country_code: Union[constr(max_length=10), NoneType] = Field(
         None, title="Country Code", description="The country code of this affiliation"
     )
-    postal_code: constr(max_length=32) = Field(
+    postal_code: Union[constr(max_length=32), NoneType] = Field(
         None, title="Postal Code", description="The postal code of this affiliation"
     )
 
@@ -220,6 +220,12 @@ class Dataset(DatasetAlias, AgencyRun):
 
 class Asjc(DemocratizingRunSchema):
     code: int = Field(None, title="Code", description="ASJC Code")
-    label: constr(max_length=1024) = Field(
+    label: Union[constr(max_length=1024), NoneType] = Field(
         None, title="Label", description="A label for this ASJC"
+    )
+
+
+class Publisher(DemocratizingRunSchema, DemocratizingExternalSchema):
+    name: Union[constr(max_length=120), NoneType] = Field(
+        None, title="Publisher", description="The name of a publisher"
     )
