@@ -46,7 +46,7 @@ class DemocratizingExternalSchema(BaseModel):
     external_id: Union[constr(max_length=128), NoneType] = Field(
         None,
         title="External ID",
-        description="An ID for identifying this record in an external data source"
+        description="An ID for identifying this record in an external data source",
     )
 
 
@@ -143,7 +143,9 @@ class DatasetAlias(DemocratizingRunSchema):
         None, title="Alias", description="The identifying alias or name of a dataset"
     )
     parent_alias_id: Union[int, NoneType] = Field(
-        None, title="Parent Alias ID", description="If this dataset alias is a child, the parent_alias_id field identifies the parent alias"
+        None,
+        title="Parent Alias ID",
+        description="If this dataset alias is a child, the parent_alias_id field identifies the parent alias",
     )
     alias_type: Union[constr(max_length=50), NoneType] = Field(
         None, title="Alias Type", description="The type of alias for this dataset"

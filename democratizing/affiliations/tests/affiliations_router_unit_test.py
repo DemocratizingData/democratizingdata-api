@@ -2,7 +2,7 @@ from democratizing.models import Affiliation
 import logging
 
 
-def test_authors(test_client, mock_db):
+def test_affiliations(test_client, mock_db):
     mock_db.query.return_value.all.return_value = [
         Affiliation(id=1, institution_name="test")
     ]

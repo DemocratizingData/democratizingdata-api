@@ -40,6 +40,7 @@ tags_metadata = [
     {"name": "datasets", "description": "Operations with datasets"},
     {"name": "publications", "description": "Operations with publications"},
     {"name": "asjcs", "description": "Operations with ASJCs"},
+    {"name": "publishers", "description": "Operations with Publishers"},
 ]
 
 

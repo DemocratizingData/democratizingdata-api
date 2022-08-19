@@ -7,6 +7,7 @@ from democratizing.agency_runs.router import router as agency_runs_router
 from democratizing.affiliations.router import router as affiliations_router
 from democratizing.datasets.router import router as datasets_router
 from democratizing.asjcs.router import router as asjcs_router
+from democratizing.publishers.router import router as publishers_router
 
 routers = [
     topics_router,
@@ -18,4 +19,5 @@ routers = [
     affiliations_router,
     datasets_router,
     asjcs_router,
+    publishers_router,
 ]
