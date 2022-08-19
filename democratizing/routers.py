@@ -9,7 +9,10 @@ from democratizing.datasets.router import router as datasets_router
 from democratizing.asjcs.router import router as asjcs_router
 from democratizing.publishers.router import router as publishers_router
 from democratizing.journals.router import router as journals_router
-from democratizing.publication_authors.router import router as publication_authors_router
+from democratizing.publication_authors.router import (
+    router as publication_authors_router,
+)
+from democratizing.publication_asjcs.router import router as publication_asjcs_router
 
 routers = [
     topics_router,
@@ -23,5 +26,6 @@ routers = [
     asjcs_router,
     publishers_router,
     journals_router,
-    publication_authors_router
+    publication_authors_router,
+    publication_asjcs_router,
 ]

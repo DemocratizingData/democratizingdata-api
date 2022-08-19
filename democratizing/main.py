@@ -41,6 +41,12 @@ tags_metadata = [
     {"name": "publications", "description": "Operations with publications"},
     {"name": "asjcs", "description": "Operations with ASJCs"},
     {"name": "publishers", "description": "Operations with Publishers"},
+    {"name": "journals", "description": "Operations with Journals"},
+    {
+        "name": "publication_authors",
+        "description": "Operations with Publication Authors",
+    },
+    {"name": "publication_asjcs", "description": "Operations with Publication ASJCs"},
 ]
 
 

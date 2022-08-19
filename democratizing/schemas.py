@@ -251,15 +251,26 @@ class PublicationAuthor(DemocratizingRunSchema):
     publication_id: int = Field(
         None,
         title="Publication ID",
-        description="The ID of the associated publication for this record"
+        description="The ID of the associated publication for this record",
     )
     author_id: int = Field(
         None,
         title="Author ID",
-        description="The ID of the associated author for this record"
+        description="The ID of the associated author for this record",
     )
     author_position: Union[int, NoneType] = Field(
+        None, title="Author Position", description="The author position"
+    )
+
+
+class PublicationAsjc(DemocratizingRunSchema):
+    publication_id: int = Field(
         None,
-        title="Author Position",
-        description="The author position"
+        title="Publication ID",
+        description="The ID of the associated publication for this record",
+    )
+    asjc_id: int = Field(
+        None,
+        title="ASJC ID",
+        description="The ID of the associated asjc for this record",
     )

@@ -146,3 +146,10 @@ class PublicationAuthor(DemocratizingRunModel):
     publication_id = Column(Integer, ForeignKey("publication.id"))
     author_id = Column(Integer, ForeignKey("author.id"))
     author_position = Column(Integer)
+
+
+class PublicationAsjc(DemocratizingRunModel):
+    __tablename__ = "publication_asjc"
+
+    publication_id = Column(Integer, ForeignKey("publication.id"))
+    asjc_id = Column(Integer, ForeignKey("asjc.id"))
