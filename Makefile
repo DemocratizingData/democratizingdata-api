@@ -12,12 +12,12 @@ start: build
 
 # Run unit tests on *unit_test.py
 unittest: build
-	@docker-compose -f docker-compose.dev.yml run server pytest -c unit_test.ini
+	@docker-compose -f docker-compose.dev.yml run server pytest -c unit_test.ini $(flags)
 
 
 # Run integration tests on docker-compose.dev *integration_test.py
 integrationtest: build
-	@docker-compose -f docker-compose.dev.yml run server pytest -c integration_test.ini
+	@docker-compose -f docker-compose.dev.yml run server pytest -c integration_test.ini $(flags)
 
 # Pulls all Docker images not yet available but needed to run pgrest
 pull:

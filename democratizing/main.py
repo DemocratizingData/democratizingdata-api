@@ -4,8 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 import logging
 import sys
-from democratizing.topics.router import router as topics_router
-from democratizing.publications.router import router as publications_router
+from democratizing.routers import routers
+
 
 # Set up logging
 logger = logging.getLogger()
@@ -14,8 +14,12 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 streamHandler.setFormatter(formatter)
 logger.addHandler(streamHandler)
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO")
+SQL_LOGLEVEL = os.environ.get("SQL_LOGLEVEL", "INFO")
 logger.setLevel(LOGLEVEL)
+logging.getLogger("sqlalchemy.engine").setLevel(SQL_LOGLEVEL)
+
 logger.error(f"Log level {LOGLEVEL}")
+logger.error(f"SQLAlchemy Log Level {SQL_LOGLEVEL}")
 
 # Initialize database
 logger.debug("Initializing PostgreSQL connection")
@@ -30,8 +34,29 @@ tags_metadata = [
         "name": "authors",
         "description": "Operations with authors",
     },
+    {"name": "agency_runs", "description": "Operations with agency runs"},
+    {"name": "dataset_aliases", "description": "Operations with dataset aliases"},
+    {"name": "models", "description": "Operations with run models"},
     {"name": "datasets", "description": "Operations with datasets"},
     {"name": "publications", "description": "Operations with publications"},
+    {"name": "asjcs", "description": "Operations with ASJCs"},
+    {"name": "publishers", "description": "Operations with Publishers"},
+    {"name": "journals", "description": "Operations with Journals"},
+    {
+        "name": "publication_authors",
+        "description": "Operations with Publication Authors",
+    },
+    {"name": "publication_asjcs", "description": "Operations with Publication ASJCs"},
+    {
+        "name": "publication_dataset_aliases",
+        "description": "Operations with Publication Dataset Aliases",
+    },
+    {"name": "pda_models", "description": "Operations with PDA Models"},
+    {
+        "name": "author_affiliations",
+        "description": "Operations with Author Affiliations",
+    },
+    {"name": "issns", "description": "Operations with ISSNs"},
 ]
 
 
@@ -51,5 +76,5 @@ app.add_middleware(
 )
 
 # Include subroutes
-app.include_router(topics_router)
-app.include_router(publications_router)
+for router in routers:
+    app.include_router(router)
