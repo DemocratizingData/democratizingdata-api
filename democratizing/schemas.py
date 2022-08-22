@@ -329,6 +329,7 @@ class AuthorAffiliation(DemocratizingRunSchema):
         title="Affiliation ID",
         description="The ID of the affiliation for this record",
     )
+    # Currently in dev, this is a date instead of datetime. Clarification has been requested
     last_updated_date: date = Field(
         None, title="Last Updated Date", description="Timestamp of last update"
     )
