@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from types import NoneType
 
 from pydantic import BaseModel, Field, constr
@@ -196,7 +196,7 @@ class AgencyRun(DemocratizingSchema):
     version: constr(max_length=32) = Field(
         None, title="Version", description="The version number for this run"
     )
-    run_date: Union[datetime, NoneType] = Field(
+    run_date: Union[date, NoneType] = Field(
         None, title="Run Date", description="The date of this run"
     )
 
@@ -328,6 +328,9 @@ class AuthorAffiliation(DemocratizingRunSchema):
         None,
         title="Affiliation ID",
         description="The ID of the affiliation for this record",
+    )
+    last_updated_date: date = Field(
+        None, title="Last Updated Date", description="Timestamp of last update"
     )
 
 

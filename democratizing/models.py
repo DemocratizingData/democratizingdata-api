@@ -106,7 +106,7 @@ class AgencyRun(DemocratizingModel):
 
     agency = Column(String)
     version = Column(String)
-    run_date = Column(Date)
+    run_date = Column(DateTime)
 
 
 class Affiliation(DemocratizingRunModel, DemocratizingExternalModel):
