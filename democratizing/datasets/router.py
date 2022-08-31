@@ -18,7 +18,7 @@ router = APIRouter(
 )
 
 
-@router.get("")
+@router.get("", response_model=list[schemas.Dataset])
 def get_datasets(
     pagination: PaginationParams = Depends(get_pagination_params),
     db: Session = Depends(get_db),
