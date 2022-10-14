@@ -68,14 +68,6 @@ class Publication(DemocratizingRunModel, DemocratizingExternalModel):
     fw_citation_impact = Column(Float)
 
 
-class PublicationTopic(DemocratizingRunModel):
-    __tablename__ = "publication_topic"
-
-    publication_id = Column(Integer, ForeignKey("publication.id"))
-    topic_id = Column(Integer, ForeignKey("topic.id"))
-    score = Column(String)
-
-
 class Author(DemocratizingRunModel, DemocratizingExternalModel):
     __tablename__ = "author"
 
@@ -158,6 +150,13 @@ class PublicationAuthor(DemocratizingRunModel, DemocratizingPublicationIdModel):
 
     author_id = Column(Integer, ForeignKey("author.id"))
     author_position = Column(Integer)
+
+
+class PublicationTopic(DemocratizingRunModel, DemocratizingPublicationIdModel):
+    __tablename__ = "publication_topic"
+
+    topic_id = Column(Integer, ForeignKey("topic.id"))
+    score = Column(String)
 
 
 class PublicationAsjc(DemocratizingRunModel, DemocratizingPublicationIdModel):

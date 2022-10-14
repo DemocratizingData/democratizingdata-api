@@ -269,6 +269,16 @@ class PublicationAuthor(DemocratizingRunSchema, DemocratizingPublicationIdSchema
         None, title="Author Position", description="The author position"
     )
 
+class PublicationTopic(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
+    topic_id: int = Field(
+        None,
+        title="Topic ID",
+        description="The ID of the associated Topic for this record",
+    )
+    score: Union[int, NoneType] = Field(
+        None, title="Score", description="The topic score"
+    )
+
 
 class PublicationAsjc(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
     asjc_id: int = Field(
