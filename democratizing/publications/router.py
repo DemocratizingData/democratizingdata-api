@@ -24,3 +24,27 @@ def get_publications(
     db: Session = Depends(get_db),
 ):
     return crud.get_publications(pagination, db)
+
+@router.get("/{publication_id}/topics", response_model=list[schemas.Topic])
+def get_publication_topics(
+    publication_id: int,
+    pagination: PaginationParams = Depends(get_pagination_params),
+    db: Session = Depends(get_db),
+):
+    return crud.get_publication_topics(publication_id, pagination, db)
+
+@router.get("/{publication_id}/authors", response_model=list[schemas.Author])
+def get_publication_authors(
+    publication_id: int,
+    pagination: PaginationParams = Depends(get_pagination_params),
+    db: Session = Depends(get_db),
+):
+    return crud.get_publication_authors(publication_id, pagination, db)
+
+@router.get("/{publication_id}/datasets", response_model=list[schemas.DatasetAlias])
+def get_publication_datasets(
+        publication_id: int,
+        pagination: PaginationParams = Depends(get_pagination_params),
+        db: Session = Depends(get_db),
+):
+    return crud.get_publication_datasets(publication_id, pagination, db)
