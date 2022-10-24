@@ -9,17 +9,12 @@ from democratizing.datasets.router import router as datasets_router
 from democratizing.asjcs.router import router as asjcs_router
 from democratizing.publishers.router import router as publishers_router
 from democratizing.journals.router import router as journals_router
-from democratizing.publication_authors.router import (
-    router as publication_authors_router,
-)
+from democratizing.publication_authors.router import router as publication_authors_router
+from democratizing.publication_topics.router import router as publication_topics_router
 from democratizing.publication_asjcs.router import router as publication_asjcs_router
-from democratizing.publication_dataset_aliases.router import (
-    router as publication_dataset_aliases_router,
-)
+from democratizing.publication_dataset_aliases.router import router as publication_dataset_aliases_router
 from democratizing.pda_models.router import router as pda_models_router
-from democratizing.author_affiliations.router import (
-    router as author_affiliations_router,
-)
+from democratizing.author_affiliations.router import router as author_affiliations_router
 from democratizing.issns.router import router as issns_router
 
 routers = [
@@ -34,6 +29,7 @@ routers = [
     asjcs_router,
     publishers_router,
     journals_router,
+    publication_topics_router,
     publication_authors_router,
     publication_asjcs_router,
     publication_dataset_aliases_router,
