@@ -24,3 +24,35 @@ def get_datasets(
     db: Session = Depends(get_db),
 ):
     return crud.get_datasets(pagination, db)
+
+@router.get("/{parent_alias_id}/topics", response_model=list[schemas.Topic])
+def get_publication_topics(
+    parent_alias_id: int,
+    pagination: PaginationParams = Depends(get_pagination_params),
+    db: Session = Depends(get_db),
+):
+    return crud.get_dataset_topics(parent_alias_id, pagination, db)
+
+@router.get("/{parent_alias_id}/authors", response_model=list[schemas.Author])
+def get_publication_authors(
+    parent_alias_id: int,
+    pagination: PaginationParams = Depends(get_pagination_params),
+    db: Session = Depends(get_db),
+):
+    return crud.get_dataset_authors(parent_alias_id, pagination, db)
+
+@router.get("/{parent_alias_id}/publications", response_model=list[schemas.Publication])
+def get_publication_datasets(
+        parent_alias_id: int,
+        pagination: PaginationParams = Depends(get_pagination_params),
+        db: Session = Depends(get_db),
+):
+    return crud.get_dataset_publications(parent_alias_id, pagination, db)
+
+@router.get("/{parent_alias_id}/aliases", response_model=list[schemas.DatasetAlias])
+def get_publication_datasets(
+        parent_alias_id: int,
+        pagination: PaginationParams = Depends(get_pagination_params),
+        db: Session = Depends(get_db),
+):
+    return crud.get_dataset_aliases(parent_alias_id, pagination, db)
