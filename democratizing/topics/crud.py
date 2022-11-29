@@ -20,9 +20,7 @@ def get_topics(pagination: PaginationParams, db: Session, agency: Union[str, Non
         return apply_pagination(db.query(Topic), pagination).all()
 
 
-def get_topic_publications(
-    topic_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]
-) -> list[Publication]:
+def get_topic_publications(topic_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]) -> list[Publication]:
     if (agency):
         return apply_pagination(
             db.query(Publication)
@@ -42,9 +40,7 @@ def get_topic_publications(
             pagination,
         ).all()
 
-def get_topic_authors(
-    topic_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]
-) -> list[Author]:
+def get_topic_authors(topic_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]) -> list[Author]:
     if (agency):
         return apply_pagination(
             db.query(Author)
@@ -68,9 +64,7 @@ def get_topic_authors(
             pagination,
         ).all()
 
-def get_topic_datasets(
-    topic_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]
-) -> list[DatasetAlias]:
+def get_topic_datasets(topic_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]) -> list[DatasetAlias]:
     if (agency):
         return apply_pagination(
             db.query(DatasetAlias)
