@@ -76,4 +76,4 @@ def get_publication_datasets(publication_id: int, pagination: PaginationParams, 
             .join(PublicationDatasetAlias)
             .filter(PublicationDatasetAlias.publication_id == publication_id),
             pagination,
-            ).all()
+        ).all()
