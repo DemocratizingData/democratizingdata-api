@@ -61,7 +61,7 @@ tags_metadata = [
 
 
 app = FastAPI(
-    title="Show US the Data API",
+    title="Democratizing Data API",
     description="An API for datasets",
     version="0.0.1",
     openapi_tags=tags_metadata,
