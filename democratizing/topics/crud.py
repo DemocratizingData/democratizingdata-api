@@ -34,8 +34,6 @@ def get_topic_publications(topic_id: int, pagination: PaginationParams, db: Sess
         return apply_pagination(
             db.query(Publication)
             .join(PublicationTopic)
-            .join(AgencyRun)
-            .filter(AgencyRun.agency == agency)
             .filter(PublicationTopic.topic_id == topic_id),
             pagination,
         ).all()
@@ -58,8 +56,6 @@ def get_topic_authors(topic_id: int, pagination: PaginationParams, db: Session, 
             .join(PublicationAuthor)
             .join(Publication)
             .join(PublicationTopic)
-            .join(AgencyRun)
-            .filter(AgencyRun.agency == agency)
             .filter(PublicationTopic.topic_id == topic_id),
             pagination,
         ).all()
