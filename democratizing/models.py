@@ -102,7 +102,7 @@ class AgencyRun(DemocratizingModel):
 
 
 class Affiliation(DemocratizingRunModel, DemocratizingExternalModel):
-    __tablename__ = "affiliation"
+    __tablename__ = "publication_affiliation"
 
     institution_name = Column(String)
     address = Column(String)
@@ -166,7 +166,7 @@ class PublicationAsjc(DemocratizingRunModel, DemocratizingPublicationIdModel):
 
 
 class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdModel):
-    __tablename__ = "publication_dataset_alias"
+    __tablename__ = "dyad"
 
     elsevier_id = Column(Integer)
     dataset_alias_id = Column(Integer, ForeignKey("dataset_alias.id"))
@@ -178,7 +178,7 @@ class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdM
 
 
 class PdaModel(DemocratizingRunModel):
-    __tablename__ = "pda_model"
+    __tablename__ = "dyad_model"
 
     publication_dataset_alias_id = Column(
         Integer, ForeignKey("publication_dataset_alias.id")
@@ -191,7 +191,7 @@ class AuthorAffiliation(DemocratizingRunModel):
     __tablename__ = "author_affiliation"
 
     publication_author_id = Column(Integer, ForeignKey("publication_author.id"))
-
+    affiliation_id = Column(Integer, ForeignKey("publication_affiliation.id"))
 
 class ISSN(DemocratizingRunModel):
     __tablename__ = "issn"
