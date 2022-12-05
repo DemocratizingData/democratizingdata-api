@@ -168,7 +168,6 @@ class PublicationAsjc(DemocratizingRunModel, DemocratizingPublicationIdModel):
 class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdModel):
     __tablename__ = "dyad"
 
-    elsevier_id = Column(Integer)
     dataset_alias_id = Column(Integer, ForeignKey("dataset_alias.id"))
     alias_id = Column(Integer)
     mention_candidate = Column(String)

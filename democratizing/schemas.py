@@ -289,9 +289,6 @@ class PublicationAsjc(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
 
 
 class PublicationDatasetAlias(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
-    elsevier_id: int = Field(
-        None, title="Elsevier ID", description="The elsevier ID for this record"
-    )
     dataset_alias_id: Union[int, NoneType] = Field(
         None,
         title="Dataset Alias ID",
