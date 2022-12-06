@@ -101,8 +101,8 @@ class AgencyRun(DemocratizingModel):
     run_date = Column(DateTime)
 
 
-class Affiliation(DemocratizingRunModel, DemocratizingExternalModel):
-    __tablename__ = "affiliation"
+class PublicationAffiliation(DemocratizingRunModel, DemocratizingExternalModel):
+    __tablename__ = "publication_affiliation"
 
     institution_name = Column(String)
     address = Column(String)
@@ -165,11 +165,10 @@ class PublicationAsjc(DemocratizingRunModel, DemocratizingPublicationIdModel):
     asjc_id = Column(Integer, ForeignKey("asjc.id"))
 
 
-class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdModel):
-    __tablename__ = "publication_dataset_alias"
+class Dyad(DemocratizingRunModel, DemocratizingPublicationIdModel):
+    __tablename__ = "dyad"
 
-    elsevier_id = Column(Integer)
-    dataset_alias_id = Column(Integer, ForeignKey("dataset_alias.id"))
+    dataset_alias_id = Column(Integer, ForeignKey("dyad.id"))
     alias_id = Column(Integer)
     mention_candidate = Column(String)
     snippet = Column(String)
@@ -177,11 +176,11 @@ class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdM
     fuzzy_score = Column(Float)
 
 
-class PdaModel(DemocratizingRunModel):
-    __tablename__ = "pda_model"
+class DyadModel(DemocratizingRunModel):
+    __tablename__ = "dyad_model"
 
-    publication_dataset_alias_id = Column(
-        Integer, ForeignKey("publication_dataset_alias.id")
+    dyad_id = Column(
+        Integer, ForeignKey("dyad.id")
     )
     model_id = Column(Integer, ForeignKey("model.id"))
     score = Column(Float)
@@ -191,11 +190,9 @@ class AuthorAffiliation(DemocratizingRunModel):
     __tablename__ = "author_affiliation"
 
     publication_author_id = Column(Integer, ForeignKey("publication_author.id"))
-    affiliation_id = Column(Integer, ForeignKey("affiliation.id"))
-
+    affiliation_id = Column(Integer, ForeignKey("publication_affiliation.id"))
 
 class ISSN(DemocratizingRunModel):
     __tablename__ = "issn"
 
     journal_id = Column(Integer)
-    ISSN = Column(String)

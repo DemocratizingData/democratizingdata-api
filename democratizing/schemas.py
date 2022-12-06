@@ -201,9 +201,9 @@ class AgencyRun(DemocratizingSchema):
     )
 
 
-class Affiliation(DemocratizingRunSchema, DemocratizingExternalSchema):
+class PublicationAffiliation(DemocratizingRunSchema, DemocratizingExternalSchema):
     """
-    Institution affiliations
+    Publication's institution affiliations
     """
 
     institution_name: Union[constr(max_length=750), NoneType] = Field(
@@ -288,10 +288,7 @@ class PublicationAsjc(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
     )
 
 
-class PublicationDatasetAlias(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
-    elsevier_id: int = Field(
-        None, title="Elsevier ID", description="The elsevier ID for this record"
-    )
+class Dyad(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
     dataset_alias_id: Union[int, NoneType] = Field(
         None,
         title="Dataset Alias ID",
@@ -316,8 +313,8 @@ class PublicationDatasetAlias(DemocratizingRunSchema, DemocratizingPublicationId
     )
 
 
-class PdaModel(DemocratizingRunSchema):
-    publication_dataset_alias_id: int = Field(
+class DyadModel(DemocratizingRunSchema):
+    dyad_id: int = Field(
         None,
         title="Publication Dataset Alias ID",
         description="The ID of the publication dataset alias associated with this record",
@@ -334,11 +331,6 @@ class AuthorAffiliation(DemocratizingRunSchema):
         title="Publication Author ID",
         description="The ID of the publication author for this record",
     )
-    affiliation_id: Union[int, NoneType] = Field(
-        None,
-        title="Affiliation ID",
-        description="The ID of the affiliation for this record",
-    )
     # Currently in dev, this is a date instead of datetime. Clarification has been requested
     last_updated_date: date = Field(
         None, title="Last Updated Date", description="Timestamp of last update"
@@ -348,7 +340,4 @@ class AuthorAffiliation(DemocratizingRunSchema):
 class ISSN(DemocratizingRunSchema):
     journal_id: Union[int, NoneType] = Field(
         None, title="Journal ID", description="The ID of the journal for this record"
-    )
-    ISSN: Union[constr(max_length=13), NoneType] = Field(
-        None, title="ISSN", description="ISSN"
     )

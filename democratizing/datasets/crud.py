@@ -1,4 +1,4 @@
-from democratizing.models import DatasetAlias, AgencyRun, Publication, PublicationDatasetAlias, Topic, PublicationTopic, \
+from democratizing.models import DatasetAlias, AgencyRun, Publication, Dyad, Topic, PublicationTopic, \
     Author, PublicationAuthor
 from democratizing.utils import apply_pagination
 from democratizing.dependencies import PaginationParams
@@ -49,7 +49,7 @@ def get_dataset_publications(parent_alias_id: int, pagination: PaginationParams,
     if (agency):
         return apply_pagination(
             db.query(Publication)
-            .join(PublicationDatasetAlias)
+            .join(Dyad)
             .join(DatasetAlias)
             .join(AgencyRun)
             .filter(AgencyRun.agency == agency)
@@ -59,7 +59,7 @@ def get_dataset_publications(parent_alias_id: int, pagination: PaginationParams,
     else:
         return apply_pagination(
             db.query(Publication)
-            .join(PublicationDatasetAlias)
+            .join(Dyad)
             .join(DatasetAlias)
             .filter(DatasetAlias.parent_alias_id == parent_alias_id),
             pagination,
@@ -72,7 +72,7 @@ def get_dataset_topics(parent_alias_id: int, pagination: PaginationParams, db: S
             db.query(Topic)
             .join(PublicationTopic)
             .join(Publication)
-            .join(PublicationDatasetAlias)
+            .join(Dyad)
             .join(DatasetAlias)
             .join(AgencyRun)
             .filter(AgencyRun.agency == agency)
@@ -84,7 +84,7 @@ def get_dataset_topics(parent_alias_id: int, pagination: PaginationParams, db: S
             db.query(Topic)
             .join(PublicationTopic)
             .join(Publication)
-            .join(PublicationDatasetAlias)
+            .join(Dyad)
             .join(DatasetAlias)
             .filter(DatasetAlias.parent_alias_id == parent_alias_id),
             pagination,
@@ -97,7 +97,7 @@ def get_dataset_authors(parent_alias_id: int, pagination: PaginationParams, db: 
             db.query(Author)
             .join(PublicationAuthor)
             .join(Publication)
-            .join(PublicationDatasetAlias)
+            .join(Dyad)
             .join(DatasetAlias)
             .join(AgencyRun)
             .filter(AgencyRun.agency == agency)
@@ -109,7 +109,7 @@ def get_dataset_authors(parent_alias_id: int, pagination: PaginationParams, db: 
             db.query(Author)
             .join(PublicationAuthor)
             .join(Publication)
-            .join(PublicationDatasetAlias)
+            .join(Dyad)
             .join(DatasetAlias)
             .filter(DatasetAlias.parent_alias_id == parent_alias_id),
             pagination,
