@@ -201,9 +201,9 @@ class AgencyRun(DemocratizingSchema):
     )
 
 
-class Affiliation(DemocratizingRunSchema, DemocratizingExternalSchema):
+class PublicationAffiliation(DemocratizingRunSchema, DemocratizingExternalSchema):
     """
-    Institution affiliations
+    Publication's institution affiliations
     """
 
     institution_name: Union[constr(max_length=750), NoneType] = Field(
@@ -288,7 +288,7 @@ class PublicationAsjc(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
     )
 
 
-class PublicationDatasetAlias(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
+class Dyad(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
     dataset_alias_id: Union[int, NoneType] = Field(
         None,
         title="Dataset Alias ID",
@@ -313,8 +313,8 @@ class PublicationDatasetAlias(DemocratizingRunSchema, DemocratizingPublicationId
     )
 
 
-class PdaModel(DemocratizingRunSchema):
-    publication_dataset_alias_id: int = Field(
+class DyadModel(DemocratizingRunSchema):
+    dyad_id: int = Field(
         None,
         title="Publication Dataset Alias ID",
         description="The ID of the publication dataset alias associated with this record",

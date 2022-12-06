@@ -101,7 +101,7 @@ class AgencyRun(DemocratizingModel):
     run_date = Column(DateTime)
 
 
-class Affiliation(DemocratizingRunModel, DemocratizingExternalModel):
+class PublicationAffiliation(DemocratizingRunModel, DemocratizingExternalModel):
     __tablename__ = "publication_affiliation"
 
     institution_name = Column(String)
@@ -165,10 +165,10 @@ class PublicationAsjc(DemocratizingRunModel, DemocratizingPublicationIdModel):
     asjc_id = Column(Integer, ForeignKey("asjc.id"))
 
 
-class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdModel):
+class Dyad(DemocratizingRunModel, DemocratizingPublicationIdModel):
     __tablename__ = "dyad"
 
-    dataset_alias_id = Column(Integer, ForeignKey("dataset_alias.id"))
+    dataset_alias_id = Column(Integer, ForeignKey("dyad.id"))
     alias_id = Column(Integer)
     mention_candidate = Column(String)
     snippet = Column(String)
@@ -176,11 +176,11 @@ class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdM
     fuzzy_score = Column(Float)
 
 
-class PdaModel(DemocratizingRunModel):
+class DyadModel(DemocratizingRunModel):
     __tablename__ = "dyad_model"
 
-    publication_dataset_alias_id = Column(
-        Integer, ForeignKey("publication_dataset_alias.id")
+    dyad_id = Column(
+        Integer, ForeignKey("dyad.id")
     )
     model_id = Column(Integer, ForeignKey("model.id"))
     score = Column(Float)
