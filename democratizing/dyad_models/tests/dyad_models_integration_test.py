@@ -5,7 +5,7 @@ from democratizing.schemas import DyadModel
 from democratizing.dependencies import PaginationParams
 
 
-def test_get_pda_models(integration_db_session):
+def test_get_dyad_models(integration_db_session):
     result = DyadModel.from_orm(
         get_dyad_models(PaginationParams(limit=1, offet=0), integration_db_session)[0]
     )
