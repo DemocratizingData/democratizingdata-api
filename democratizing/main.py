@@ -48,10 +48,10 @@ tags_metadata = [
     },
     {"name": "publication_asjcs", "description": "Operations with Publication ASJCs"},
     {
-        "name": "publication_dataset_aliases",
-        "description": "Operations with Publication Dataset Aliases",
+        "name": "dyads",
+        "description": "Operations with Dyads",
     },
-    {"name": "pda_models", "description": "Operations with PDA Models"},
+    {"name": "dyad_models", "description": "Operations with Dyad Models"},
     {
         "name": "author_affiliations",
         "description": "Operations with Author Affiliations",

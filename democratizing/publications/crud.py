@@ -1,4 +1,4 @@
-from democratizing.models import Publication, Topic, DatasetAlias, Author, PublicationTopic, PublicationAuthor, PublicationDatasetAlias, AgencyRun
+from democratizing.models import Publication, Topic, DatasetAlias, Author, PublicationTopic, PublicationAuthor, Dyad, AgencyRun
 from democratizing.utils import apply_pagination
 from democratizing.dependencies import PaginationParams
 from sqlalchemy.orm import Session
@@ -64,16 +64,16 @@ def get_publication_datasets(publication_id: int, pagination: PaginationParams, 
     if (agency):
         return apply_pagination(
             db.query(DatasetAlias)
-            .join(PublicationDatasetAlias)
+            .join(Dyad)
             .join(AgencyRun)
             .filter(AgencyRun.agency == agency)
-            .filter(PublicationDatasetAlias.publication_id == publication_id),
+            .filter(Dyad.publication_id == publication_id),
             pagination,
         ).all()
     else:
         return apply_pagination(
             db.query(DatasetAlias)
-            .join(PublicationDatasetAlias)
-            .filter(PublicationDatasetAlias.publication_id == publication_id),
+            .join(Dyad)
+            .filter(Dyad.publication_id == publication_id),
             pagination,
         ).all()
