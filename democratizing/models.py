@@ -112,6 +112,17 @@ class PublicationAffiliation(DemocratizingRunModel, DemocratizingExternalModel):
     postal_code = Column(String)
 
 
+class Affiliation(DemocratizingRunModel, DemocratizingExternalModel):
+    __tablename__ = "publication_affiliation"
+
+    institution_name = Column(String)
+    address = Column(String)
+    city = Column(String)
+    state = Column(String)
+    country_code = Column(String)
+    postal_code = Column(String)
+
+
 class Asjc(DemocratizingModel):
     __tablename__ = "asjc"
 
@@ -186,11 +197,32 @@ class DyadModel(DemocratizingRunModel):
     score = Column(Float)
 
 
+class PublicationDatasetAlias(DemocratizingRunModel, DemocratizingPublicationIdModel):
+    __tablename__ = "dyad"
+
+    dataset_alias_id = Column(Integer, ForeignKey("dyad.id"))
+    alias_id = Column(Integer)
+    mention_candidate = Column(String)
+    snippet = Column(String)
+    is_fuzzy = Column(Boolean)
+    fuzzy_score = Column(Float)
+
+
+class PdaModel(DemocratizingRunModel):
+    __tablename__ = "dyad_model"
+
+    dyad_id = Column(
+        Integer, ForeignKey("dyad.id")
+    )
+    model_id = Column(Integer, ForeignKey("model.id"))
+    score = Column(Float)
+
+
 class AuthorAffiliation(DemocratizingRunModel):
     __tablename__ = "author_affiliation"
 
     publication_author_id = Column(Integer, ForeignKey("publication_author.id"))
-    affiliation_id = Column(Integer, ForeignKey("publication_affiliation.id"))
+    publication_affiliation_id = Column(Integer, ForeignKey("publication_affiliation.id"))
 
 class ISSN(DemocratizingRunModel):
     __tablename__ = "issn"
