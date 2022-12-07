@@ -331,6 +331,11 @@ class AuthorAffiliation(DemocratizingRunSchema):
         title="Publication Author ID",
         description="The ID of the publication author for this record",
     )
+    publication_affiliation_id: Union[int, NoneType] = Field(
+        None,
+        title="Publication Affiliation ID",
+        description="The ID of the publication affiliation for this record",
+    )
     # Currently in dev, this is a date instead of datetime. Clarification has been requested
     last_updated_date: date = Field(
         None, title="Last Updated Date", description="Timestamp of last update"
