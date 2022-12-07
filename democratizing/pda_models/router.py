@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 import logging
 from democratizing import schemas
 from democratizing.dependencies import get_db, get_pagination_params, PaginationParams
-from democratizing.pda_models import crud
+from democratizing.dyad_models import crud
 from sqlalchemy.orm import Session
 from typing import Union
 
@@ -19,10 +19,10 @@ router = APIRouter(
 )
 
 
-@router.get("", response_model=list[schemas.PdaModel])
+@router.get("", response_model=list[schemas.DyadModel])
 def get_pda_models(
     pagination: PaginationParams = Depends(get_pagination_params),
     db: Session = Depends(get_db),
     agency: Union[str, None] = None,
 ):
-    return crud.get_pda_models(pagination, db, agency)
+    return crud.get_dyad_models(pagination, db, agency)

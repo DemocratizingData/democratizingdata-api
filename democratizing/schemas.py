@@ -228,33 +228,6 @@ class PublicationAffiliation(DemocratizingRunSchema, DemocratizingExternalSchema
     )
 
 
-class Affiliation(DemocratizingRunSchema, DemocratizingExternalSchema):
-    """
-    Publication's institution affiliations
-    """
-
-    institution_name: Union[constr(max_length=750), NoneType] = Field(
-        None,
-        title="Institution Name",
-        description="The name of the institution of this affiliation",
-    )
-    address: Union[constr(max_length=750), NoneType] = Field(
-        None, title="Address", description="The street address of this affiliation"
-    )
-    city: Union[constr(max_length=128), NoneType] = Field(
-        None, title="City", description="The name of the city of this affiliation"
-    )
-    state: Union[constr(max_length=128), NoneType] = Field(
-        None, title="State", description="The state of this affiliation"
-    )
-    country_code: Union[constr(max_length=10), NoneType] = Field(
-        None, title="Country Code", description="The country code of this affiliation"
-    )
-    postal_code: Union[constr(max_length=32), NoneType] = Field(
-        None, title="Postal Code", description="The postal code of this affiliation"
-    )
-
-
 class Dataset(DatasetAlias, AgencyRun):
     pass
 
@@ -351,41 +324,6 @@ class DyadModel(DemocratizingRunSchema):
         None, title="Score", description="The model's score"
     )
 
-
-class PublicationDatasetAlias(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
-    dataset_alias_id: Union[int, NoneType] = Field(
-        None,
-        title="Dataset Alias ID",
-        description="The ID of the associated dataset alias for this record",
-    )
-    alias_id: Union[int, NoneType] = Field(
-        None,
-        title="Alias ID",
-        description="The ID of the associated alias for this record",
-    )
-    mention_candidate: constr(max_length=1028) = Field(
-        None, title="Mention Candidate", description="The mention candidate"
-    )
-    snippet: constr(max_length=2048) = Field(
-        None, title="Snippet", description="A snippet of text data"
-    )
-    is_fuzzy: Union[bool, NoneType] = Field(
-        None, title="Is Fuzzy", description="Flag indicating if this record is fuzzy"
-    )
-    fuzzy_score: Union[float, NoneType] = Field(
-        None, title="Fuzzy Score", description="The fuzzy score"
-    )
-
-class PdaModel(DemocratizingRunSchema):
-    dyad_id: int = Field(
-        None,
-        title="Dataset Alias ID",
-        description="The ID of the publication dataset alias associated with this record",
-    )
-    model_id: int = Field(None, title="Model ID", description="The model's ID")
-    score: Union[float, NoneType] = Field(
-        None, title="Score", description="The model's score"
-    )
 
 class AuthorAffiliation(DemocratizingRunSchema):
     publication_author_id: Union[int, NoneType] = Field(
