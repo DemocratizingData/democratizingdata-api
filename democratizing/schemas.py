@@ -316,7 +316,7 @@ class Dyad(DemocratizingRunSchema, DemocratizingPublicationIdSchema):
 class DyadModel(DemocratizingRunSchema):
     dyad_id: int = Field(
         None,
-        title="Publication Dataset Alias ID",
+        title="Dataset Alias ID",
         description="The ID of the publication dataset alias associated with this record",
     )
     model_id: int = Field(None, title="Model ID", description="The model's ID")
