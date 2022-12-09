@@ -4,6 +4,7 @@ from democratizing import schemas
 from democratizing.run_models import crud
 from sqlalchemy.orm import Session
 from democratizing.dependencies import get_db, get_pagination_params, PaginationParams
+from typing import Union
 
 logger = logging.getLogger(__name__)
 
@@ -22,5 +23,6 @@ router = APIRouter(
 def get_models(
     pagination: PaginationParams = Depends(get_pagination_params),
     db: Session = Depends(get_db),
+    agency: Union[str, None] = None,
 ):
-    return crud.get_models(pagination, db)
+    return crud.get_models(pagination, db, agency)

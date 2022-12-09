@@ -3,6 +3,7 @@ import logging
 from democratizing import schemas
 from democratizing.dependencies import get_db, get_pagination_params, PaginationParams
 from democratizing.author_affiliations import crud
+from typing import Union
 from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
@@ -22,5 +23,6 @@ router = APIRouter(
 def get_author_affiliations(
     pagination: PaginationParams = Depends(get_pagination_params),
     db: Session = Depends(get_db),
+    agency: Union[str, None] = None,
 ):
-    return crud.get_author_affiliations(pagination, db)
+    return crud.get_author_affiliations(pagination, db, agency)
