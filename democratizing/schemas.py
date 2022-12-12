@@ -231,7 +231,6 @@ class PublicationAffiliation(DemocratizingRunSchema, DemocratizingExternalSchema
 class Dataset(DatasetAlias, AgencyRun):
     pass
 
-
 class Asjc(DemocratizingRunSchema):
     code: int = Field(None, title="Code", description="ASJC Code")
     label: Union[constr(max_length=1024), NoneType] = Field(
@@ -346,3 +345,6 @@ class ISSN(DemocratizingRunSchema):
     journal_id: Union[int, NoneType] = Field(
         None, title="Journal ID", description="The ID of the journal for this record"
     )
+
+class FullAuthor(Author, PublicationAffiliation, AuthorAffiliation, PublicationAuthor):
+    pass
