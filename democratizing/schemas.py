@@ -346,5 +346,5 @@ class ISSN(DemocratizingRunSchema):
         None, title="Journal ID", description="The ID of the journal for this record"
     )
 
-class FullAuthor(Author, PublicationAffiliation, AuthorAffiliation, PublicationAuthor):
+class FullAuthor(Author, PublicationAffiliation):
     pass

@@ -57,6 +57,7 @@ tags_metadata = [
         "description": "Operations with Author Affiliations",
     },
     {"name": "issns", "description": "Operations with ISSNs"},
+    {"name": "full_authors", "description": "Full Author with Affiliations"},
 ]
 
 
