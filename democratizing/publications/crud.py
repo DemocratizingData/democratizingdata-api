@@ -1,4 +1,4 @@
-from democratizing.models import Publication, Topic, DatasetAlias, Author, PublicationTopic, PublicationAuthor, Dyad, AgencyRun
+from democratizing.models import Publication, Topic, DatasetAlias, Author, PublicationTopic, PublicationAuthor, Dyad, AgencyRun, AuthorAffiliation, PublicationAffiliation
 from democratizing.utils import apply_pagination
 from democratizing.dependencies import PaginationParams
 from sqlalchemy.orm import Session
@@ -41,11 +41,25 @@ def get_publication_topics(publication_id: int, pagination: PaginationParams, db
         ).all()
 
 
-def get_publication_authors(publication_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]) -> list[Author]:
+def get_publication_authors(publication_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]):
     if (agency):
         return apply_pagination(
-            db.query(Author)
+            db.query(
+                Author.id,
+                Author.run_id,
+                Author.external_id,
+                Author.given_name,
+                Author.family_name,
+                Author.last_updated_date,
+                PublicationAffiliation.institution_name,
+                PublicationAffiliation.address,
+                PublicationAffiliation.city,
+                PublicationAffiliation.state,
+                PublicationAffiliation.country_code,
+                PublicationAffiliation.postal_code)
             .join(PublicationAuthor)
+            .join(AuthorAffiliation)
+            .join(PublicationAffiliation)
             .join(AgencyRun)
             .filter(AgencyRun.agency == agency)
             .filter(PublicationAuthor.publication_id == publication_id),
@@ -53,8 +67,22 @@ def get_publication_authors(publication_id: int, pagination: PaginationParams, d
         ).all()
     else:
         return apply_pagination(
-            db.query(Author)
+            db.query(
+                Author.id,
+                Author.run_id,
+                Author.external_id,
+                Author.given_name,
+                Author.family_name,
+                Author.last_updated_date,
+                PublicationAffiliation.institution_name,
+                PublicationAffiliation.address,
+                PublicationAffiliation.city,
+                PublicationAffiliation.state,
+                PublicationAffiliation.country_code,
+                PublicationAffiliation.postal_code)
             .join(PublicationAuthor)
+            .join(AuthorAffiliation)
+            .join(PublicationAffiliation)
             .filter(PublicationAuthor.publication_id == publication_id),
             pagination,
         ).all()

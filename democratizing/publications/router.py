@@ -36,7 +36,7 @@ def get_publication_topics(
 ):
     return crud.get_publication_topics(publication_id, pagination, db, agency)
 
-@router.get("/{publication_id}/authors", response_model=list[schemas.Author])
+@router.get("/{publication_id}/authors", response_model=list[schemas.FullAuthor])
 def get_publication_authors(
     publication_id: int,
     pagination: PaginationParams = Depends(get_pagination_params),

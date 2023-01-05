@@ -168,7 +168,7 @@ class PublicationAsjc(DemocratizingRunModel, DemocratizingPublicationIdModel):
 class Dyad(DemocratizingRunModel, DemocratizingPublicationIdModel):
     __tablename__ = "dyad"
 
-    dataset_alias_id = Column(Integer, ForeignKey("dyad.id"))
+    dataset_alias_id = Column(Integer, ForeignKey("dataset_alias.id"))
     alias_id = Column(Integer)
     mention_candidate = Column(String)
     snippet = Column(String)

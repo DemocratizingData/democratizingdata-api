@@ -1,5 +1,5 @@
 from democratizing.models import DatasetAlias, AgencyRun, Publication, Dyad, Topic, PublicationTopic, \
-    Author, PublicationAuthor
+    Author, PublicationAuthor, AuthorAffiliation, PublicationAffiliation
 from democratizing.utils import apply_pagination
 from democratizing.dependencies import PaginationParams
 from sqlalchemy.orm import Session
@@ -94,9 +94,23 @@ def get_dataset_topics(parent_alias_id: int, pagination: PaginationParams, db: S
 def get_dataset_authors(parent_alias_id: int, pagination: PaginationParams, db: Session, agency: Union[str, None]):
     if (agency):
         return apply_pagination(
-            db.query(Author)
+            db.query(
+                Author.id,
+                Author.run_id,
+                Author.external_id,
+                Author.given_name,
+                Author.family_name,
+                Author.last_updated_date,
+                PublicationAffiliation.institution_name,
+                PublicationAffiliation.address,
+                PublicationAffiliation.city,
+                PublicationAffiliation.state,
+                PublicationAffiliation.country_code,
+                PublicationAffiliation.postal_code)
             .join(PublicationAuthor)
             .join(Publication)
+            .join(AuthorAffiliation)
+            .join(PublicationAffiliation)
             .join(Dyad)
             .join(DatasetAlias)
             .join(AgencyRun)
@@ -106,9 +120,23 @@ def get_dataset_authors(parent_alias_id: int, pagination: PaginationParams, db: 
         ).all()
     else:
         return apply_pagination(
-            db.query(Author)
+            db.query(
+                Author.id,
+                Author.run_id,
+                Author.external_id,
+                Author.given_name,
+                Author.family_name,
+                Author.last_updated_date,
+                PublicationAffiliation.institution_name,
+                PublicationAffiliation.address,
+                PublicationAffiliation.city,
+                PublicationAffiliation.state,
+                PublicationAffiliation.country_code,
+                PublicationAffiliation.postal_code)
             .join(PublicationAuthor)
             .join(Publication)
+            .join(AuthorAffiliation)
+            .join(PublicationAffiliation)
             .join(Dyad)
             .join(DatasetAlias)
             .filter(DatasetAlias.parent_alias_id == parent_alias_id),

@@ -36,7 +36,7 @@ def get_publication_topics(
 ):
     return crud.get_dataset_topics(parent_alias_id, pagination, db, agency)
 
-@router.get("/{parent_alias_id}/authors", response_model=list[schemas.Author])
+@router.get("/{parent_alias_id}/authors", response_model=list[schemas.FullAuthor])
 def get_publication_authors(
     parent_alias_id: int,
     pagination: PaginationParams = Depends(get_pagination_params),
